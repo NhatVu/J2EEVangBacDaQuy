@@ -158,12 +158,17 @@
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-								<input type="hidden" id="txtId" value="">
-							Topic: <input id="txtTopic" class="form-control" value="Nhập chủ đề">
+							Mã SP: <input id=textMaSanPham disabled="disabled" class="form-control" value="Nhập chủ đề">
 						</div>
 						<div class="modal-body">
-							Keyword: 
-							<textarea id="txtKeyword" class="form-control" rows="3">Nhập keyword tại đây, cách nhau bởi dấu phẩy</textarea>
+							Tên SP: 
+							<textarea id="txtTenSanPham" class="form-control" rows="3"></textarea>
+							Đơn giá mua: 
+							<textarea id="txtDonGiaMua" class="form-control" rows="3"></textarea>
+							Đơn giá bán: 
+							<textarea id="txtDonGiaBan" class="form-control" rows="3"></textarea>
+							Số Luợng tồn kho: 
+							<textarea id="txtSoLuongTonKho" class="form-control" rows="3"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
@@ -226,18 +231,20 @@
 				$("#txtMessage").css("display","none");
 				$("#btnUpdateKW").css("display","");
 				
-				var table = $('#tableKW').DataTable();
+				var table = $('#tableSanPham').DataTable();
 				var data = table.row( $(keyword).parents('tr') ).data();
 				if (data != null || data !== undefined){
-					$("#txtId").val(data.id);
-					$("#txtTopic").val(data.key);
-					$("#txtKeyword").html(data.value);
-					$("#txtKeyword").val(data.value);
-			        console.log( data.id + data.key + data.value );
+					$("#txtMaSanPham").val(data.maSP);
+					$("#txtTenSanPham").val(data.tenSP);
+					$("#txtDonGiaMua").html(data.donGiaMua);
+					$("#txtDonGiaBan").val(data.donGiaBan);
+					$("#txtSoLuongTonKho").val(data.soLuongTon);
 				}else{
-					$("#txtId").val('');
-					$("#txtTopic").val('Nhập chủ đề');
-					$("#txtKeyword").html('Nhập keyword tại đây, cách nhau bởi dấu phẩy');		
+					$("#txtMaSanPham").val("");
+					$("#txtTenSanPham").val("");
+					$("#txtDonGiaMua").val("");
+					$("#txtDonGiaBan").val("");
+					$("#txtSoLuongTonKho").val("");
 				}
 			}
 			
@@ -267,14 +274,16 @@
 				
 			}
 			
-			function updateKeyword(id, key, value){
+			function updateKeyword(maSp, tenSP, donGiaMua, donGiaBan, soLuongTon){
 				var object = new Object();
-				object.id = id;
-				object.key = key;
-				object.value = value;
-				console.log("keyword: " + object.value);
+				object.maSP = maSp;
+				object.tenSP = tenSP;
+				object.donGiaMua = donGiaMua;
+				object.donGiaBan = donGiaBan;
+				object.soLuongTon = soLuongTon;
+				console.log("keyword: " + object);
 				$.ajax({
-				    url: 'updateKeyword',
+				    url: 'updateSanPham',
 				    type: 'POST',
 				    data: object,
 				    success: function(data) {
@@ -329,9 +338,9 @@
 			$("#btnUpdateKW").click(function(){
 				debugger;
 				$.LoadingOverlay("show");
-				var id = $("#txtId").val();
+				var id = $("#txtMaSanPham").val();
 				if(id != null && id != undefined && id != ''){
-					updateKeyword($("#txtId").val(), $("#txtTopic").val(), $("#txtKeyword").val());
+					updateKeyword($("#txtMaSanPham").val(), $("#txtTenSanPham").val(), $("#txtDonGiaMua").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
 				}else{
 					addKeyword($("#txtTopic").val(), $("#txtKeyword").val());
 				}

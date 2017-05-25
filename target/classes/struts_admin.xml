@@ -104,8 +104,8 @@
 			<result name="success">/WEB-INF/jsp/admin/Streaming.jsp</result>
 		</action>
 		
-		<action name="updateKeyword" class="com.vangbacdaquy.action.StreamingAction"
-			method="updateKeyword">
+		<action name="updateSanPham" class="com.vangbacdaquy.action.StreamingAction"
+			method="updateSanPham">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	

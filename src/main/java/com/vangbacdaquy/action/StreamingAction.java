@@ -33,7 +33,10 @@ public class StreamingAction extends AbstractAction{
 	
 	private SanPhamDAO spDAO= new SanPhamDAO();
 	private Integer maSP;
-	
+	private String tenSP;
+	private Integer donGiaMua;
+	private Integer donGiaBan;
+	private Integer soLuongTon;
 	public String getLogConsole() {
 		return logConsole;
 	}
@@ -57,10 +60,27 @@ public class StreamingAction extends AbstractAction{
 		return "success";
 	}
 	
-	public String updateKeyword(){
-		result.put("error", true);
-		result.put("message", "Cập nhật thất bại!");
-		return "json";
+	public String updateSanPham(){
+	    result.put("error", true);
+        result.put("message", "Cập nhật thất bại!");
+        try {
+
+            SanPhamDTO sp = new SanPhamDTO();
+            sp.setMaSP(maSP);
+            sp.setTenSP(tenSP);
+            sp.setDonGiaMua(donGiaMua);
+            sp.setDonGiaBan(donGiaBan);
+            sp.setSoLuongTon(soLuongTon);
+            
+            if(spDAO.update(sp)){
+                result.put("error", false);
+                result.put("message", "Cập nhật thành công!");
+            }
+        } catch (Exception e) {
+            result.put("error", true);
+            result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
+        }
+        return "json";
 	}
 	
 	public String removeSanPham(){
@@ -223,6 +243,38 @@ public class StreamingAction extends AbstractAction{
 
     public void setMaSP(Integer maSP) {
         this.maSP = maSP;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
+    }
+
+    public Integer getDonGiaMua() {
+        return donGiaMua;
+    }
+
+    public void setDonGiaMua(Integer donGiaMua) {
+        this.donGiaMua = donGiaMua;
+    }
+
+    public Integer getDonGiaBan() {
+        return donGiaBan;
+    }
+
+    public void setDonGiaBan(Integer donGiaBan) {
+        this.donGiaBan = donGiaBan;
+    }
+
+    public Integer getSoLuongTon() {
+        return soLuongTon;
+    }
+
+    public void setSoLuongTon(Integer soLuongTon) {
+        this.soLuongTon = soLuongTon;
     }	
 	
 	
