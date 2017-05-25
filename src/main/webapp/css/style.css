@@ -1,0 +1,115 @@
+body {}
+
+.inline-margin {
+    display: inline;
+    /*margin: 0 5%;*/
+}
+
+.show-news-filter {
+    margin-top: 10px;
+}
+
+.show-news-filter div {
+    margin: 0 2%;
+}
+
+.finish-button {
+    padding: 1% 5%;
+}
+
+.hr-black {
+    border-top-color: black;
+}
+
+.filter-distance {
+    margin: 0 2%;
+}
+
+.search-result {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.login-footer {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10%;
+}
+
+.logo-login {
+    border-top: 2px solid #FCAF17;
+    background: white;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
+    padding: 5px 0;
+    margin-bottom: 3vw;
+}
+
+.body-login {
+    background-color: #f5f5f5;
+}
+
+.inline {
+    display: inline;
+}
+
+.main-header .navbar, .main-header .logo {
+    background-color: #f5f5f5;
+}
+
+.main-sidebar, .skin-blue .sidebar-menu>li a, .sidebar-menu>li.active>a {
+    background-color: #f5f5f5;
+}
+
+.content-wrapper {
+    background-color: white;
+}
+
+.main-sidebar a {
+    color: black;
+}
+
+.user-menu b {
+    color: black;
+}
+
+.table-content-width {
+    width: 40%;
+}
+
+.form-control-padding {
+    padding: 6px 15px;
+}
+
+.download-file {}
+
+.hightlight {
+    color: red;
+}
+
+.statistics-source {
+    width: 100%;
+    padding-bottom: 4px;
+}
+
+.statistics-source select {
+    width: 100% !important;
+}
+
+.border-right {
+    border-right: solid 0.5px gray;
+}
+
+.full-width {
+	width: 100% !important;
+}
+
+.show-hot-news thead {
+	background-color: #fafafa;
+}
+
+.statictis-hr {
+	margin-top : 5px !important;
+	margin-bottom : 5px !important;
+}

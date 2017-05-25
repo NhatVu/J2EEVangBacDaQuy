@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<constant name="struts.multipart.maxSize" value="5242880000" />
+	<!-- <constant name="struts.rest.defaultExtension" value="json" /> -->
+	<constant name="struts.convention.action.suffix" value="Controller" />
+	<constant name="struts.convention.action.mapAllMatches" value="true" />
+	<constant name="struts.convention.default.parent.package"
+		value="rest-default" />
+	<constant name="struts.convention.package.locators" value="rest" />
+	<constant name="struts.action.extension" value="xhtml,,xml,json,action" />
+	<constant name="struts.mapper.class"
+		value="org.apache.struts2.dispatcher.mapper.PrefixBasedActionMapper" />
+	<constant name="struts.mapper.prefixMapping" value="/api:rest,:struts" />
+	<constant name="struts.enable.SlashesInActionNames" value="true"/>
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+	
+	<!-- DEFAULT -->
+	<package name="default" namespace="/"
+		extends="struts-default, json-default">
+		
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult"/>					
+		</result-types>
+		
+		<action name="Login" class="com.vangbacdaquy.action.LoginAction"
+			method="execute">
+			<result name="admin">/WEB-INF/jsp/editor/ShowHotNews.jsp</result>
+			<result name="editor">/WEB-INF/jsp/editor/ShowHotNews.jsp</result>
+			<result name="fail">/WEB-INF/jsp/Login.jsp</result>
+		</action>
+		<action name="executeLogin" class="com.vangbacdaquy.action.LoginAction"
+			method="login">
+			<result name="admin" type="redirect">
+				<param name="location">/editor/ShowHotNews</param>
+			</result>
+			<result name="editor" type="redirect">
+				<param name="location">/editor/ShowHotNews</param>
+			</result>
+			<result name="fail">/WEB-INF/jsp/Login.jsp</result>
+		</action>
+		
+		<action name="Logout" class="com.vangbacdaquy.action.LogoutAction"
+			method="execute">
+			<result name="success">/WEB-INF/jsp/Login.jsp</result>
+		</action>
+		<action name="Search" class="com.vangbacdaquy.action.SearchAction"
+			method="execute">
+			<result name="success">/WEB-INF/jsp/Search.jsp</result>
+		</action>
+	</package>
+	
+	
+	<include file="struts_admin.xml"/>
+	<include file="struts_user.xml"/>
+</struts>

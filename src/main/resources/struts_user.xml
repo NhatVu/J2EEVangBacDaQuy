@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+ "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- EDITOR -->
+<struts>
+	<package name="editor" namespace="/editor" extends="struts-default, json-default">
+		<interceptors>
+			<interceptor name="AuthInterceptor"
+				class="com.vangbacdaquy.interceptor.AuthInterceptor">
+
+			</interceptor>
+			<interceptor-stack name="AuthStack">
+				<interceptor-ref name="AuthInterceptor">
+					<param name="roleActions">
+						admin: /admin, /editor, /;
+						editor: /editor, /;
+					</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="AuthStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login" type="redirectAction">
+				<param name="actionName">GoLogin</param>
+				<param name="namespace">/</param>
+			</result>
+			
+			<result name="directToLogin">/WEB-INF/Index.jsp
+			</result>
+			<result name="404">/WEB-INF/jsp/404.jsp
+			</result>
+		</global-results>
+		<action name="ShowHotNews" class="com.vangbacdaquy.action.ShowHotNewsAction"
+			method="execute">
+			<result name="editor">/WEB-INF/jsp/editor/ShowHotNews.jsp</result>
+		</action>
+		<!-- Statistics -->
+		<action name="Statistics" class="com.vangbacdaquy.action.StatisticsAction"
+			method="execute">
+			<result name="success">/WEB-INF/jsp/editor/Statistics.jsp</result>
+		</action>
+
+		<!-- Tracking tweets -->
+		<action name="viewTrend" class="com.vangbacdaquy.action.TrackingTweetAction" method="viewTrend">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- HotStream -->
+		<action name="HotStream" class="com.vangbacdaquy.action.HotStreamAction">
+			<result name="success">/WEB-INF/jsp/editor/HotStream.jsp</result>
+		</action>
+		<action name="HotStreamDetail" class="com.vangbacdaquy.action.HotStreamAction">
+			<result name="success">/WEB-INF/jsp/editor/HotStreamDetail.jsp</result>
+		</action>
+	</package>
+</struts>

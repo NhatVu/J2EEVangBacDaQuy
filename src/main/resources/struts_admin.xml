@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+ "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<!-- ADMIN -->
+<struts>
+	<!-- ADMIN -->
+	<package name="admin" namespace="/admin" extends="struts-default, json-default">
+
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="AuthInterceptor"
+				class="com.vangbacdaquy.interceptor.AuthInterceptor">
+
+			</interceptor>
+			<interceptor-stack name="AuthStack">
+				<interceptor-ref name="AuthInterceptor">
+					<param name="roleActions">
+						admin: /admin, /editor, /;
+						editor: /editor, /;
+					</param>
+				</interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="AuthStack"></default-interceptor-ref>
+		<global-results>
+			<result name="login" type="redirectAction">
+				<param name="actionName">GoLogin</param>
+				<param name="namespace">/</param>
+			</result>
+			
+			<result name="directToLogin">/WEB-INF/Index.jsp
+			</result>
+			<result name="404">/WEB-INF/jsp/404.jsp
+			</result>
+		</global-results>
+
+		<action name="uploadFile" class="com.vangbacdaquy.action.UploadFileAction">
+			<!-- <interceptor-ref name="fileUpload"> -->
+			<!-- <param name="allowedTypes">image/jpeg,image/gif,text/plain</param> -->
+			<!-- </interceptor-ref> -->
+			<result name="CrawlTweet">/WEB-INF/jsp/admin/CrawlTweet.jsp</result>
+			<result name="PreprocessData">/WEB-INF/jsp/admin/PreprocessData.jsp</result>
+			<result name="TrainModel">/WEB-INF/jsp/admin/TrainModel.jsp</result>
+			<result name="PredictHotNews">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
+			<result name="StreamingClassification">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>			
+			<result name="error">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
+		</action>
+		<action name="downloadFile" class="com.vangbacdaquy.action.DownloadFileAction">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">fileInputStream</param>
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+
+		<action name="GoPrepareData" class="com.vangbacdaquy.action.PrepareDataAction"
+			method="goPrepareData">
+			<result name="admin">/WEB-INF/jsp/admin/PrepareData.jsp</result>
+		</action>
+		<action name="PrepareData" class="com.vangbacdaquy.action.PrepareDataAction"
+			method="execute">
+			<result name="admin">/WEB-INF/jsp/admin/PrepareData.jsp</result>
+		</action>
+
+		<action name="GoTrainModel" class="com.vangbacdaquy.action.TrainModelAction"
+			method="goTrainModel">
+			<result name="admin">/WEB-INF/jsp/admin/TrainModel.jsp</result>
+		</action>
+		<action name="TrainModel" class="com.vangbacdaquy.action.TrainModelAction"
+			method="execute">
+			<result name="admin">/WEB-INF/jsp/admin/TrainModel.jsp</result>
+		</action>
+
+		<action name="GoPredictHotNews" class="com.vangbacdaquy.action.PredictHotNewsAction"
+			method="goPredictHotNews">
+			<result name="admin">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
+		</action>
+		<action name="PredictHotNews" class="com.vangbacdaquy.action.PredictHotNewsAction"
+			method="execute">
+			<result name="admin">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
+		</action>
+
+		<!-- Twitter -->
+		<action name="GoCrawlTweet" class="com.vangbacdaquy.action.CrawlTweetAction"
+			method="goCrawlTweet">
+			<result name="admin">/WEB-INF/jsp/admin/CrawlTweet.jsp</result>
+		</action>
+		<action name="CrawlTweet" class="com.vangbacdaquy.action.CrawlTweetAction"
+			method="execute">
+			<result name="admin">/WEB-INF/jsp/admin/CrawlTweet.jsp</result>
+		</action>
+
+		<!-- Streaming -->
+
+		<action name="Streaming" class="com.vangbacdaquy.action.StreamingAction">
+			<result name="success">/WEB-INF/jsp/admin/Streaming.jsp</result>
+		</action>
+		
+		<action name="updateKeyword" class="com.vangbacdaquy.action.StreamingAction"
+			method="updateKeyword">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+		
+		<action name="removeKeyword" class="com.vangbacdaquy.action.StreamingAction" method="removeKeyword">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="addKeyword" class="com.vangbacdaquy.action.StreamingAction" method="addKeyword">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="getAllSanPham" class="com.vangbacdaquy.action.StreamingAction" method="getAllSanPham">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="countDocumentsByCurrentDay" class="com.vangbacdaquy.action.StreamingAction" method="countDocumentsByCurrentDay">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="streamingTwitter" class="com.vangbacdaquy.action.StreamingAction" method="streamingTwitter">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="countDocumentsGroupByYearMonthDay" class="com.vangbacdaquy.action.StreamingAction" method="countDocumentsGroupByYearMonthDay">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="GoStreamingClassification" class="com.vangbacdaquy.action.StreamingClassificationAction" method= "goStreamingClassification">
+			<result name="success">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>
+		</action>
+		<action name="StartClassification" class="com.vangbacdaquy.action.StreamingClassificationAction" method="startPredictor">
+			<result name="success">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>
+		</action>
+		<action name="StopClassification" class="com.vangbacdaquy.action.StreamingClassificationAction" method="stopPredictor">
+			<result name="success">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>
+		</action>
+		
+		<!-- Crawler link -->		
+		<action name="CrawlUrl" class="com.vangbacdaquy.action.StreamingAction">
+			<result name="success">/WEB-INF/jsp/admin/CrawlUrl.jsp</result>
+		</action>
+		
+		<action name="crawlLink" class="com.vangbacdaquy.action.StreamingAction" method="crawlLink">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<!-- Tracking tweets -->
+		<action name="TrackingTweet" class="com.vangbacdaquy.action.TrackingTweetAction">
+			<result name="success">/WEB-INF/jsp/admin/TrackingTweet.jsp</result>
+		</action>
+		
+	</package>
+</struts>
