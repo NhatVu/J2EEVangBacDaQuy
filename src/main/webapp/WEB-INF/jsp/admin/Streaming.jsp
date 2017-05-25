@@ -244,13 +244,12 @@
 			function removeKeyword(keyword){
 				var result = confirm("Want to delete?");
 				if (result) {
-					var table = $('#tableKW').DataTable();
+					var table = $("#tableSanPham").DataTable();
 					var data = table.row( $(keyword).parents('tr') ).data();
-					
+					console.log(data);
 					$.ajax({
-						url: 'removeKeyword',
-						type: 'POST',
-						data: data,
+						url: 'removeSanPham?maSP='+data.maSP,
+						type: 'GET',
 						success: function(data){
 							if(data.error == false){
 					    		alert(data.message);

@@ -111,7 +111,7 @@
 			</result>	
 		</action>
 		
-		<action name="removeKeyword" class="com.vangbacdaquy.action.StreamingAction" method="removeKeyword">
+		<action name="removeSanPham" class="com.vangbacdaquy.action.StreamingAction" method="removeSanPham">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>

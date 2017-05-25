@@ -32,6 +32,7 @@ public class StreamingAction extends AbstractAction{
 	private static final long serialVersionUID = 1L;
 	
 	private SanPhamDAO spDAO= new SanPhamDAO();
+	private Integer maSP;
 	
 	public String getLogConsole() {
 		return logConsole;
@@ -62,10 +63,24 @@ public class StreamingAction extends AbstractAction{
 		return "json";
 	}
 	
-	public String removeKeyword(){
-		result.put("error", true);
-		result.put("message", "Xoá topic " + key + " thất bại!");
-		return "json";
+	public String removeSanPham(){
+	    result.put("error", true);
+        result.put("message", "Xoá sản phẩm thất bại!");
+        try {   
+            if(maSP != null && maSP > 0){
+                SanPhamDTO sp = new SanPhamDTO();
+                sp.setMaSP(maSP);
+                if(spDAO.delete(sp)){
+                  result.put("error", false);
+                  result.put("message", "Xóa sản phẩm thành công!");
+                }
+            }
+
+        } catch (Exception e) {
+            result.put("error", true);
+            result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
+        }
+        return "json";
 	}
 	
 	public String addKeyword(){
@@ -200,7 +215,15 @@ public class StreamingAction extends AbstractAction{
 
 	public void setUrl(String url) {
 		this.url = url;
-	}	
+	}
+
+    public Integer getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(Integer maSP) {
+        this.maSP = maSP;
+    }	
 	
 	
 }
