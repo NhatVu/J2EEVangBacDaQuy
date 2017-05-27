@@ -17,7 +17,7 @@
 			                <ul class="treeview-menu">
 <!-- 			                    <li><a href="/VangBacDaQuy/admin/CrawlUrl"><i class="fa fa-circle-o"></i>Crawl Url</a></li> -->
 			                    <li><a href="/VangBacDaQuy/admin/quanlysanpham"><i class="fa fa-circle-o"></i>Quản lý sản phẩm</a></li>
-			                    <li><a href="/VangBacDaQuy/admin/Streaming"><i class="fa fa-circle-o"></i>Quản lý dịch vụ</a></li>
+			                    <li><a href="/VangBacDaQuy/admin/quanlydichvu"><i class="fa fa-circle-o"></i>Quản lý dịch vụ</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/GoStreamingClassification"><i class="fa fa-circle-o"></i>Streaming Data Classification</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/GoCrawlTweet"><i class="fa fa-circle-o"></i>Crawl Twitter</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/GoPrepareData"><i class="fa fa-circle-o"></i>Prepare Data</a></li>

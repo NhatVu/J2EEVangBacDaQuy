@@ -33,11 +33,9 @@
 												class="table table-bordered table-striped">
 												<thead>
 													<tr>
-														<th>Mã Sản phẩm</th>
-														<th>Tên Sản phẩm</th>
-														<th>Đơn Giá Mua</th>
-														<th>Đơn Giá Bán</th>
-														<th>Số Luợng Tồn Kho</th>
+														<th>Mã Dịch Vụ</th>
+														<th>Tên Dịch Vụ</th>
+														<th>Đơn Giá</th>
 														<th>Action <a href="javascript:void(0)" id="btnAddKW"><i
 																	class="fa fa-plus-square"></i> Add</a> </th>
 													</tr>
@@ -158,17 +156,13 @@
 						<div class="modal-header modal-header-remove">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							Mã SP: <input id=txtMaSanPham disabled="disabled" class="form-control" value="">
+							Mã DV: <input id=txtMaDichVu disabled="disabled" class="form-control" value="">
 						</div>
 						<div class="modal-body">
-							Tên SP: 
-							<textarea id="txtTenSanPham" class="form-control" rows="3"></textarea>
-							Đơn giá mua: 
-							<textarea id="txtDonGiaMua" class="form-control" rows="3"></textarea>
-							Đơn giá bán: 
-							<textarea id="txtDonGiaBan" class="form-control" rows="3"></textarea>
-							Số Luợng tồn kho: 
-							<textarea id="txtSoLuongTonKho" class="form-control" rows="3"></textarea>
+							Tên DV: 
+							<textarea id="txtTenDichVu" class="form-control" rows="3"></textarea>
+							Đơn giá: 
+							<textarea id="txtDonGia" class="form-control" rows="3"></textarea>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
@@ -216,11 +210,9 @@
 					destroy: true,
 			        "ajax": "getAllSanPham",
 			        "columns": [
-			            { "data": "maSP" },
-			            { "data": "tenSP" },
-			            { "data": "donGiaMua" },
-			            { "data": "donGiaBan" },
-			            { "data": "soLuongTon" },
+			            { "data": "maDV" },
+			            { "data": "tenDV" },
+			            { "data": "donGia" },
 			            { "defaultContent": edit + remove}
 			        ]
 			    } );
@@ -234,15 +226,15 @@
 				var table = $('#tableSanPham').DataTable();
 				var data = table.row( $(keyword).parents('tr') ).data();
 				if (data != null || data !== undefined){
-					$("#txtMaSanPham").val(data.maSP);
-					$("#txtTenSanPham").val(data.tenSP);
-					$("#txtDonGiaMua").html(data.donGiaMua);
+					$("#txtMaDichVu").val(data.maSP);
+					$("#txtTenDichVu").val(data.tenSP);
+					$("#txtDonGia").html(data.donGiaMua);
 					$("#txtDonGiaBan").val(data.donGiaBan);
 					$("#txtSoLuongTonKho").val(data.soLuongTon);
 				}else{
-					$("#txtMaSanPham").val("");
-					$("#txtTenSanPham").val("");
-					$("#txtDonGiaMua").val("");
+					$("#txtMaDichVu").val("");
+					$("#txtTenDichVu").val("");
+					$("#txtDonGia").val("");
 					$("#txtDonGiaBan").val("");
 					$("#txtSoLuongTonKho").val("");
 				}
@@ -340,11 +332,11 @@
 			$("#btnUpdateKW").click(function(){
 				debugger;
 				$.LoadingOverlay("show");
-				var id = $("#txtMaSanPham").val();
+				var id = $("#txtMaDichVu").val();
 				if(id != null && id != undefined && id != ''){
-					updateKeyword($("#txtMaSanPham").val(), $("#txtTenSanPham").val(), $("#txtDonGiaMua").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
+					updateKeyword($("#txtMaDichVu").val(), $("#txtTenDichVu").val(), $("#txtDonGia").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
 				}else{
-					addKeyword($("#txtTenSanPham").val(), $("#txtDonGiaMua").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
+					addKeyword($("#txtTenDichVu").val(), $("#txtDonGia").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
 				}
 				
 			});
@@ -352,12 +344,12 @@
 			$("#btnAddKW").click(function(){
 				$("#modalEditKW").modal('show');
 				$("#txtMessage").css("display","none");
-				$("#txtMaSanPham").prop('disabled', true);
+				$("#txtMaDichVu").prop('disabled', true);
 				$(".modal-header-remove").css("display","none");
-				$("#txtMaSanPham").val('');
-				$("#txtTenSanPham").val('');
-				$("#txtDonGiaMua").html('');
-				$("#txtDonGiaMua").val('');
+				$("#txtMaDichVu").val('');
+				$("#txtTenDichVu").val('');
+				$("#txtDonGia").html('');
+				$("#txtDonGia").val('');
 				$("#txtDonGiaBan").val('');
 				$("#txtSoLuongTonKho").val("");
 			});
