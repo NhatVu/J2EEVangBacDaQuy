@@ -79,4 +79,12 @@ public class SanPhamDTO {
         this.soLuongTon = soLuongTon;
     }
 
+    @Override
+    public String toString() {
+        return "SanPhamDTO [maSP=" + maSP + ", tenSP=" + tenSP + ", donGiaMua="
+                + donGiaMua + ", donGiaBan=" + donGiaBan + ", soLuongTon="
+                + soLuongTon + "]";
+    }
+
+    
 }

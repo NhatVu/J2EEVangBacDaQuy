@@ -71,6 +71,7 @@ public class StreamingAction extends AbstractAction{
             sp.setDonGiaMua(donGiaMua);
             sp.setDonGiaBan(donGiaBan);
             sp.setSoLuongTon(soLuongTon);
+            System.out.println(sp);
             
             if(spDAO.update(sp)){
                 result.put("error", false);
@@ -104,10 +105,29 @@ public class StreamingAction extends AbstractAction{
 	}
 	
 	public String addKeyword(){
-		result.put("error", true);
-		result.put("message", "Thêm mới thất bại!");
-		return "json";
-	}
+        result.put("error", true);
+        result.put("message", "Thêm mới thất bại!");
+        try {
+
+            SanPhamDTO sp = new SanPhamDTO();
+            maSP = spDAO.getNexId();
+            sp.setMaSP(maSP);
+            sp.setTenSP(tenSP);
+            sp.setDonGiaMua(donGiaMua);
+            sp.setDonGiaBan(donGiaBan);
+            sp.setSoLuongTon(soLuongTon);
+            System.out.println(sp);
+            
+            if(spDAO.insert(sp)){
+                result.put("error", false);
+                result.put("message", "Thêm mới thành công!");
+            }
+        } catch (Exception e) {
+            result.put("error", true);
+            result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
+        }
+        return "json";
+    }
 	
 	public String getAllSanPham(){
 	    result.put("error", true);

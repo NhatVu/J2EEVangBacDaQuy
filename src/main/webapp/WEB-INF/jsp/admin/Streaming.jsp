@@ -155,10 +155,10 @@
 						<div id="txtMessage" class="alert" style="display:none;">
 							Cập nhật keyword thành công!
 						</div>
-						<div class="modal-header">
+						<div class="modal-header modal-header-remove">
 							<button type="button" class="close" data-dismiss="modal"
 								aria-hidden="true">&times;</button>
-							Mã SP: <input id=textMaSanPham disabled="disabled" class="form-control" value="Nhập chủ đề">
+							Mã SP: <input id=txtMaSanPham disabled="disabled" class="form-control" value="">
 						</div>
 						<div class="modal-body">
 							Tên SP: 
@@ -306,11 +306,13 @@
 				$.LoadingOverlay("hide");
 			}
 			
-			function addKeyword(key, value){
+			function addKeyword(tenSP, donGiaMua, donGiaBan, soLuongTon){
 				var object = new Object();
-				object.key = key;
-				object.value = value;
-				console.log("keyword: " + object.value);
+				object.tenSP = tenSP;
+				object.donGiaMua = donGiaMua;
+				object.donGiaBan = donGiaBan;
+				object.soLuongTon = soLuongTon;
+				console.log("keyword: " + object);
 				$.ajax({
 				    url: 'addKeyword',
 				    type: 'POST',
@@ -342,7 +344,7 @@
 				if(id != null && id != undefined && id != ''){
 					updateKeyword($("#txtMaSanPham").val(), $("#txtTenSanPham").val(), $("#txtDonGiaMua").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
 				}else{
-					addKeyword($("#txtTopic").val(), $("#txtKeyword").val());
+					addKeyword($("#txtTenSanPham").val(), $("#txtDonGiaMua").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
 				}
 				
 			});
@@ -350,11 +352,14 @@
 			$("#btnAddKW").click(function(){
 				$("#modalEditKW").modal('show');
 				$("#txtMessage").css("display","none");
-				$("#txtId").val('');
-				$("#txtTopic").val('Nhập chủ đề');
-				$("#txtKeyword").html('Nhập keyword tại đây, cách nhau bởi dấu phẩy');
-				$("#txtKeyword").val('Nhập keyword tại đây, cách nhau bởi dấu phẩy');
-				$("#btnUpdateKW").css("display","");
+				$("#txtMaSanPham").prop('disabled', true);
+				$(".modal-header-remove").css("display","none");
+				$("#txtMaSanPham").val('');
+				$("#txtTenSanPham").val('');
+				$("#txtDonGiaMua").html('');
+				$("#txtDonGiaMua").val('');
+				$("#txtDonGiaBan").val('');
+				$("#txtSoLuongTonKho").val("");
 			});
 			
 		</script>
