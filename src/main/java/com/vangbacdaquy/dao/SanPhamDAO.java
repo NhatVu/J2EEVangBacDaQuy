@@ -360,9 +360,48 @@ public class SanPhamDAO extends SuperDAO {
 
 		return null;
 	}
+
+	public int getLastID() {
+        try {
+            this.getConnection();
+            call = connection.prepareCall("{call SANPHAM_getLastID(?)}");
+            call.registerOutParameter(1, java.sql.Types.VARCHAR);
+
+            call.execute();
+            return call.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CTP_BanHangDAO.class.getName()).log(Level.SEVERE,
+                    null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CTP_BanHangDAO.class.getName()).log(
+                            Level.SEVERE, null, ex);
+                }
+            }
+
+            try {
+                call.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CTP_BanHangDAO.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
+        }
+
+        return 0;
+    }
+
+    public int getNexId() {
+        return getLastID() + 1;
+
+    }
 	
 	public static void main(String[] args) {
         SanPhamDAO sp = new SanPhamDAO();
         System.out.println("Next Id: " + sp.getAllSanPham());
+        System.out.println("Last Id" + sp.getNexId());
     }
 }

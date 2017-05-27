@@ -100,48 +100,48 @@
 
 		<!-- Streaming -->
 
-		<action name="Streaming" class="com.vangbacdaquy.action.StreamingAction">
-			<result name="success">/WEB-INF/jsp/admin/Streaming.jsp</result>
+		<action name="quanlysanpham" class="com.vangbacdaquy.action.QuanLySanPhamAction">
+			<result name="success">/WEB-INF/jsp/admin/QuanLySanPham.jsp</result>
 		</action>
 		
-		<action name="updateKeyword" class="com.vangbacdaquy.action.StreamingAction"
-			method="updateKeyword">
+		<action name="updateSanPham" class="com.vangbacdaquy.action.QuanLySanPhamAction"
+			method="updateSanPham">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	
 		</action>
 		
-		<action name="removeKeyword" class="com.vangbacdaquy.action.StreamingAction" method="removeKeyword">
+		<action name="removeSanPham" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="removeSanPham">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="addKeyword" class="com.vangbacdaquy.action.StreamingAction" method="addKeyword">
+		<action name="addKeyword" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="addKeyword">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="getAllSanPham" class="com.vangbacdaquy.action.StreamingAction" method="getAllSanPham">
+		<action name="getAllSanPham" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="getAllSanPham">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="countDocumentsByCurrentDay" class="com.vangbacdaquy.action.StreamingAction" method="countDocumentsByCurrentDay">
+		<action name="countDocumentsByCurrentDay" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="countDocumentsByCurrentDay">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="streamingTwitter" class="com.vangbacdaquy.action.StreamingAction" method="streamingTwitter">
+		<action name="streamingTwitter" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="streamingTwitter">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="countDocumentsGroupByYearMonthDay" class="com.vangbacdaquy.action.StreamingAction" method="countDocumentsGroupByYearMonthDay">
+		<action name="countDocumentsGroupByYearMonthDay" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="countDocumentsGroupByYearMonthDay">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
@@ -158,11 +158,11 @@
 		</action>
 		
 		<!-- Crawler link -->		
-		<action name="CrawlUrl" class="com.vangbacdaquy.action.StreamingAction">
+		<action name="CrawlUrl" class="com.vangbacdaquy.action.QuanLySanPhamAction">
 			<result name="success">/WEB-INF/jsp/admin/CrawlUrl.jsp</result>
 		</action>
 		
-		<action name="crawlLink" class="com.vangbacdaquy.action.StreamingAction" method="crawlLink">
+		<action name="crawlLink" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="crawlLink">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>

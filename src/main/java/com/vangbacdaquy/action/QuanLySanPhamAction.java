@@ -12,7 +12,7 @@ import com.vangbacdaquy.crawler.Page;
 import com.vangbacdaquy.dao.SanPhamDAO;
 import com.vangbacdaquy.dto.SanPhamDTO;
 
-public class StreamingAction extends AbstractAction{
+public class QuanLySanPhamAction extends AbstractAction{
 	private String logConsole;
 	private Integer id;
 	private String key;
@@ -32,7 +32,11 @@ public class StreamingAction extends AbstractAction{
 	private static final long serialVersionUID = 1L;
 	
 	private SanPhamDAO spDAO= new SanPhamDAO();
-	
+	private Integer maSP;
+	private String tenSP;
+	private Integer donGiaMua;
+	private Integer donGiaBan;
+	private Integer soLuongTon;
 	public String getLogConsole() {
 		return logConsole;
 	}
@@ -56,23 +60,74 @@ public class StreamingAction extends AbstractAction{
 		return "success";
 	}
 	
-	public String updateKeyword(){
-		result.put("error", true);
-		result.put("message", "Cập nhật thất bại!");
-		return "json";
+	public String updateSanPham(){
+	    result.put("error", true);
+        result.put("message", "Cập nhật thất bại!");
+        try {
+
+            SanPhamDTO sp = new SanPhamDTO();
+            sp.setMaSP(maSP);
+            sp.setTenSP(tenSP);
+            sp.setDonGiaMua(donGiaMua);
+            sp.setDonGiaBan(donGiaBan);
+            sp.setSoLuongTon(soLuongTon);
+            System.out.println(sp);
+            
+            if(spDAO.update(sp)){
+                result.put("error", false);
+                result.put("message", "Cập nhật thành công!");
+            }
+        } catch (Exception e) {
+            result.put("error", true);
+            result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
+        }
+        return "json";
 	}
 	
-	public String removeKeyword(){
-		result.put("error", true);
-		result.put("message", "Xoá topic " + key + " thất bại!");
-		return "json";
+	public String removeSanPham(){
+	    result.put("error", true);
+        result.put("message", "Xoá sản phẩm thất bại!");
+        try {   
+            if(maSP != null && maSP > 0){
+                SanPhamDTO sp = new SanPhamDTO();
+                sp.setMaSP(maSP);
+                if(spDAO.delete(sp)){
+                  result.put("error", false);
+                  result.put("message", "Xóa sản phẩm thành công!");
+                }
+            }
+
+        } catch (Exception e) {
+            result.put("error", true);
+            result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
+        }
+        return "json";
 	}
 	
 	public String addKeyword(){
-		result.put("error", true);
-		result.put("message", "Thêm mới thất bại!");
-		return "json";
-	}
+        result.put("error", true);
+        result.put("message", "Thêm mới thất bại!");
+        try {
+
+            SanPhamDTO sp = new SanPhamDTO();
+            maSP = spDAO.getNexId();
+            sp.setMaSP(maSP);
+            sp.setTenSP(tenSP);
+            sp.setDonGiaMua(donGiaMua);
+            sp.setDonGiaBan(donGiaBan);
+            sp.setSoLuongTon(soLuongTon);
+            System.out.println(sp);
+            
+            if(spDAO.insert(sp)){
+                result.put("error", false);
+                result.put("message", "Thêm mới thành công!");
+            }
+        } catch (Exception e) {
+            result.put("error", true);
+            result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
+        }
+        return "json";
+    }
 	
 	public String getAllSanPham(){
 	    result.put("error", true);
@@ -200,7 +255,47 @@ public class StreamingAction extends AbstractAction{
 
 	public void setUrl(String url) {
 		this.url = url;
-	}	
+	}
+
+    public Integer getMaSP() {
+        return maSP;
+    }
+
+    public void setMaSP(Integer maSP) {
+        this.maSP = maSP;
+    }
+
+    public String getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
+    }
+
+    public Integer getDonGiaMua() {
+        return donGiaMua;
+    }
+
+    public void setDonGiaMua(Integer donGiaMua) {
+        this.donGiaMua = donGiaMua;
+    }
+
+    public Integer getDonGiaBan() {
+        return donGiaBan;
+    }
+
+    public void setDonGiaBan(Integer donGiaBan) {
+        this.donGiaBan = donGiaBan;
+    }
+
+    public Integer getSoLuongTon() {
+        return soLuongTon;
+    }
+
+    public void setSoLuongTon(Integer soLuongTon) {
+        this.soLuongTon = soLuongTon;
+    }	
 	
 	
 }
