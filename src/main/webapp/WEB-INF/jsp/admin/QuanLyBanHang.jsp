@@ -100,24 +100,14 @@
 														<th>Thành tiền</th>
 													</tr>
 												</thead>
-												<tbody>
+												<tbody id ="tablePhieuBanHang">
 														<tr>
 															<td style="width: 200px;">
-																<div class="dropdown">
-																  <button class="btn btn-default dropdown-toggle" style="width: 100%" type="button" id="danhSachSanPham" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-																    Dropdown
-																    <span class="caret"></span>
-																  </button>
-																  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-																    <li><a href="#">Action</a></li>
-																    <li><a href="#">Another action</a></li>
-																    <li><a href="#">Something else here</a></li>
-																    <li role="separator" class="divider"></li>
-																    <li><a href="#">Separated link</a></li>
-																  </ul>
-																</div>
+																<select id="danhSachSanPham" class="selectpicker">
+																	<option value="-1">-Chọn sản phẩm-</option>
+																</select>
 															</td>
-															<td style="width: 200px;"> <input type="text" class="form-control"></td>
+															<td style="width: 200px;"> <input type="number" oninput="tinhTien(this.value);" class="form-control"></td>
 															<td></td>
 															<td></td>
 															<td></td>
@@ -137,7 +127,17 @@
 				<!-- /.box-footer -->
 			</div>
 			<!-- /.box -->
-
+				<div class="container customer-infor">
+					<div class="row">
+						<div class="col-md-2"><button id="themSanPham" type="button" class="btn btn-primary btn-block">Thêm sản phẩm</button></div>
+						<div class="col-md-2"><button id="xoaSanPham" type="button" class="btn btn-danger btn-block">Xóa sản phẩm</button></div>
+						<div class="col-md-2"></div>
+						<div id="tongCong" class="col-md-1"><strong>Tổng cộng</strong></div>
+						<div class="col-md-3">
+							<input type="text" disabled="disabled" class="form-control">
+						</div>
+					</div>
+				</div>
 			</section>
 			<!-- /.content -->
 		
@@ -164,10 +164,14 @@
 			autoclose : true,
 			onSelect: $.noop
 		});
+		var danhSachSanPham = null;
+		var tempRow = "";
+		getListSanPham();
 	});
 		$("#ngayBan").val(moment().format("DD/MM/YYYY"));
 		
 		$("#layMaKH").click(function(){
+			$.LoadingOverlay("show");
 			$.ajax({
 			    url: 'getNextCustomerId',
 			    type: 'POST',
@@ -182,6 +186,7 @@
 		});
 		
 		$("#kiemtra").click(function(){
+			$.LoadingOverlay("show");
 			$("#message").css("display","none");
 			var maKH = $("#maKhachHang").val();
 			$.ajax({
@@ -202,6 +207,71 @@
 			  });
 			$.LoadingOverlay("hide");
 		})
+		
+		function getListSanPham(){
+			$.LoadingOverlay("show");
+			$.ajax({
+			    url: 'getAllSanPham',
+			    type: 'POST',
+			    success: function(data) {
+			    		var list = data.data;
+			    		$("#danhSachSanPham").html("");
+			    		var content = "";
+			    		content += "<option  value='-1'>-Chọn sản phẩm-</option>";
+			    		for(var i = 0; i < list.length; i++){
+			    			content += "<option  value='"+list[i].maSP+"'>"+ list[i].tenSP +"</option>";
+			    		}
+			    		$("#danhSachSanPham").html(content);
+			    		$('.selectpicker').selectpicker('refresh');
+			    		tempRow = $("#tablePhieuBanHang").children("tr:nth-child(1)").html();
+			    		danhSachSanPham = list;
+			    },
+			    error: function(xhr, ajaxOptions, thrownError){
+			    	console.log(thrownError);
+			    }
+			  });
+			$.LoadingOverlay("hide");
+		}
+		
+		
+		$('#danhSachSanPham').on('changed.bs.select', function (e) {
+			 var id = $("#danhSachSanPham").selectpicker('val');
+			 console.log(id);
+			 var sp = getProduct(id);
+			 console.log("San pham: " + sp);
+			 console.log(this);
+			 var donGiaBan = getTdTable(3);
+			 donGiaBan.html(sp == null ? "" : sp.donGiaBan);
+			});
+		$("#themSanPham").click(function(){
+			themDongMoi();
+		});
+		
+		function getProduct(maSP){
+			for(var i = 0; i < danhSachSanPham.length; i++){
+				if(danhSachSanPham[i].maSP == maSP) return danhSachSanPham[i];
+			}
+			return null;
+		}
+		
+		function getTdTable(index){
+			return $("#danhSachSanPham").closest("tr").children("td:nth-child("+index+")");
+		}
+		
+		function tinhTien(soLuong){
+			var thanhTien = getTdTable(4);
+			var donGia = getTdTable(3).html();
+			thanhTien.html(soLuong*Number(donGia));
+		}
+		
+		function themDongMoi(){
+
+			var newRow = '<tr>'+
+							tempRow
+							'</tr>';
+				
+			$("#tablePhieuBanHang").append(newRow);
+		}
 		</script>
 
 </body>

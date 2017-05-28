@@ -62,6 +62,9 @@
 	<!-- Additional files for the Highslide popup effect -->
 	<script src="https://code.highcharts.com/highcharts.src.js"></script>
 	
+	<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".main-sidebar .admin-treeview").addClass("active");
