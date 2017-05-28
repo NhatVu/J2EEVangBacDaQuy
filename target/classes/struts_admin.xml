@@ -98,7 +98,7 @@
 			<result name="admin">/WEB-INF/jsp/admin/CrawlTweet.jsp</result>
 		</action>
 
-		<!-- Streaming -->
+		<!-- Quan ly san pham -->
 
 		<action name="quanlysanpham" class="com.vangbacdaquy.action.QuanLySanPhamAction">
 			<result name="success">/WEB-INF/jsp/admin/QuanLySanPham.jsp</result>
@@ -129,32 +129,35 @@
 			</result>
 		</action>
 		
-		<action name="countDocumentsByCurrentDay" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="countDocumentsByCurrentDay">
+		<!-- Quan ly dich vu -->
+
+		<action name="quanlydichvu" class="com.vangbacdaquy.action.QuanLyDichVuAction">
+			<result name="success">/WEB-INF/jsp/admin/QuanLyDichVu.jsp</result>
+		</action>
+		
+		<action name="updateDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction"
+			method="updateDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+		
+		<action name="removeDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="removeDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="streamingTwitter" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="streamingTwitter">
+		<action name="addDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="addDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="countDocumentsGroupByYearMonthDay" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="countDocumentsGroupByYearMonthDay">
+		<action name="getAllDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="getAllDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
-		</action>
-		
-		<action name="GoStreamingClassification" class="com.vangbacdaquy.action.StreamingClassificationAction" method= "goStreamingClassification">
-			<result name="success">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>
-		</action>
-		<action name="StartClassification" class="com.vangbacdaquy.action.StreamingClassificationAction" method="startPredictor">
-			<result name="success">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>
-		</action>
-		<action name="StopClassification" class="com.vangbacdaquy.action.StreamingClassificationAction" method="stopPredictor">
-			<result name="success">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>
 		</action>
 		
 		<!-- Crawler link -->		
