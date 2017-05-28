@@ -166,29 +166,18 @@
 			<result name="success">/WEB-INF/jsp/admin/QuanLyBanHang.jsp</result>
 		</action>
 		
-		<action name="updateDichVu" class="com.vangbacdaquy.action.QuanLyBanHangAction"
-			method="updateDichVu">
+		<action name="getNextCustomerId" class="com.vangbacdaquy.action.QuanLyBanHangAction"
+			method="getNextCustomerId">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	
 		</action>
 		
-		<action name="removeDichVu" class="com.vangbacdaquy.action.QuanLyBanHangAction" method="removeDichVu">
+		<action name="checkKhachQuen" class="com.vangbacdaquy.action.QuanLyBanHangAction"
+			method="checkKhachQuen">
 			<result type="json" name="json">
 				<param name="root">result</param>
-			</result>
-		</action>
-		
-		<action name="addDichVu" class="com.vangbacdaquy.action.QuanLyBanHangAction" method="addDichVu">
-			<result type="json" name="json">
-				<param name="root">result</param>
-			</result>
-		</action>
-		
-		<action name="getAllDichVu" class="com.vangbacdaquy.action.QuanLyBanHangAction" method="getAllDichVu">
-			<result type="json" name="json">
-				<param name="root">result</param>
-			</result>
+			</result>	
 		</action>
 		
 		<!-- Crawler link -->		
