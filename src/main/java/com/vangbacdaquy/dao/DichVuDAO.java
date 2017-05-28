@@ -32,17 +32,18 @@ public class DichVuDAO extends SuperDAO {
 			call.setString("TENDV", dv.getTenDV());
 			call.setDouble("DONGIA", dv.getDonGia());
 
-			return call.execute();
+			if(call.executeUpdate() > 0)
+                return true;
 
 		} catch (SQLException ex) {
-			Logger.getLogger(CTP_BanHangDAO.class.getName()).log(Level.SEVERE,
+			Logger.getLogger(TAG).log(Level.SEVERE,
 					null, ex);
 		} finally {
 			if (connection != null)
 				try {
 					connection.close();
 				} catch (SQLException ex) {
-					Logger.getLogger(CTP_BanHangDAO.class.getName()).log(
+					Logger.getLogger(TAG).log(
 							Level.SEVERE, null, ex);
 				}
 		}
@@ -57,17 +58,18 @@ public class DichVuDAO extends SuperDAO {
 			call.setString("TENDV", dv.getTenDV());
 			call.setDouble("DONGIA", dv.getDonGia());
 
-			return call.execute();
+			if(call.executeUpdate() > 0)
+                return true;
 
 		} catch (SQLException ex) {
-			Logger.getLogger(CTP_BanHangDAO.class.getName()).log(Level.SEVERE,
+			Logger.getLogger(TAG).log(Level.SEVERE,
 					null, ex);
 		} finally {
 			if (connection != null)
 				try {
 					connection.close();
 				} catch (SQLException ex) {
-					Logger.getLogger(CTP_BanHangDAO.class.getName()).log(
+					Logger.getLogger(TAG).log(
 							Level.SEVERE, null, ex);
 				}
 		}
@@ -80,17 +82,18 @@ public class DichVuDAO extends SuperDAO {
 			call = connection.prepareCall("{call DICHVU_Del(?)}");
 			call.setInt("MADV", dv.getMaDV());
 
-			return call.execute();
+			if(call.executeUpdate() > 0)
+                return true;
 
 		} catch (SQLException ex) {
-			Logger.getLogger(CTP_BanHangDAO.class.getName()).log(Level.SEVERE,
+			Logger.getLogger(TAG).log(Level.SEVERE,
 					null, ex);
 		} finally {
 			if (connection != null)
 				try {
 					connection.close();
 				} catch (SQLException ex) {
-					Logger.getLogger(CTP_BanHangDAO.class.getName()).log(
+					Logger.getLogger(TAG).log(
 							Level.SEVERE, null, ex);
 				}
 		}

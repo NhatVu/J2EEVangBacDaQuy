@@ -15,7 +15,7 @@
 			<section class="content-header">
 					<div class="row text-center">
 						<h4 style="margin-bottom: 25px !important;">
-							Danh sách sản phẩm
+							Danh sách dịch vụ
 						</h4>
 					</div>
 				<hr/>
@@ -208,7 +208,7 @@
 				$('#tableSanPham').DataTable( {
 			        fixedHeader: true,
 					destroy: true,
-			        "ajax": "getAllSanPham",
+			        "ajax": "getAllDichVu",
 			        "columns": [
 			            { "data": "maDV" },
 			            { "data": "tenDV" },
@@ -226,17 +226,14 @@
 				var table = $('#tableSanPham').DataTable();
 				var data = table.row( $(keyword).parents('tr') ).data();
 				if (data != null || data !== undefined){
-					$("#txtMaDichVu").val(data.maSP);
-					$("#txtTenDichVu").val(data.tenSP);
-					$("#txtDonGia").html(data.donGiaMua);
-					$("#txtDonGiaBan").val(data.donGiaBan);
-					$("#txtSoLuongTonKho").val(data.soLuongTon);
+					$("#txtMaDichVu").val(data.maDV);
+					$("#txtTenDichVu").val(data.tenDV);
+					$("#txtDonGia").html(data.donGia);
+					$("#txtDonGia").val(data.donGia);
 				}else{
 					$("#txtMaDichVu").val("");
 					$("#txtTenDichVu").val("");
 					$("#txtDonGia").val("");
-					$("#txtDonGiaBan").val("");
-					$("#txtSoLuongTonKho").val("");
 				}
 			}
 			
@@ -247,7 +244,7 @@
 					var data = table.row( $(keyword).parents('tr') ).data();
 					console.log(data);
 					$.ajax({
-						url: 'removeSanPham?maSP='+data.maSP,
+						url: 'removeDichVu?maDV='+data.maDV,
 						type: 'GET',
 						success: function(data){
 							if(data.error == false){
@@ -266,16 +263,14 @@
 				
 			}
 			
-			function updateKeyword(maSp, tenSP, donGiaMua, donGiaBan, soLuongTon){
+			function updateKeyword(maDV, tenDV, donGia){
 				var object = new Object();
-				object.maSP = maSp;
-				object.tenSP = tenSP;
-				object.donGiaMua = donGiaMua;
-				object.donGiaBan = donGiaBan;
-				object.soLuongTon = soLuongTon;
+				object.maDV = maDV;
+				object.tenDV = tenDV;
+				object.donGia = donGia;
 				console.log("keyword: " + object);
 				$.ajax({
-				    url: 'updateSanPham',
+				    url: 'updateDichVu',
 				    type: 'POST',
 				    data: object,
 				    success: function(data) {
@@ -298,15 +293,13 @@
 				$.LoadingOverlay("hide");
 			}
 			
-			function addKeyword(tenSP, donGiaMua, donGiaBan, soLuongTon){
+			function addKeyword(tenDV, donGia){
 				var object = new Object();
-				object.tenSP = tenSP;
-				object.donGiaMua = donGiaMua;
-				object.donGiaBan = donGiaBan;
-				object.soLuongTon = soLuongTon;
+				object.tenDV = tenDV;
+				object.donGia = donGia;
 				console.log("keyword: " + object);
 				$.ajax({
-				    url: 'addKeyword',
+				    url: 'addDichVu',
 				    type: 'POST',
 				    data: object,
 				    success: function(data) {
@@ -334,9 +327,9 @@
 				$.LoadingOverlay("show");
 				var id = $("#txtMaDichVu").val();
 				if(id != null && id != undefined && id != ''){
-					updateKeyword($("#txtMaDichVu").val(), $("#txtTenDichVu").val(), $("#txtDonGia").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
+					updateKeyword($("#txtMaDichVu").val(), $("#txtTenDichVu").val(), $("#txtDonGia").val());
 				}else{
-					addKeyword($("#txtTenDichVu").val(), $("#txtDonGia").val(), $("#txtDonGiaBan").val(), $("#txtSoLuongTonKho").val());
+					addKeyword($("#txtTenDichVu").val(), $("#txtDonGia").val());
 				}
 				
 			});

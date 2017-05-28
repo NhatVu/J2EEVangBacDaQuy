@@ -135,26 +135,26 @@
 			<result name="success">/WEB-INF/jsp/admin/QuanLyDichVu.jsp</result>
 		</action>
 		
-		<action name="updateSanPham" class="com.vangbacdaquy.action.QuanLyDichVuAction"
-			method="updateSanPham">
+		<action name="updateDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction"
+			method="updateDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	
 		</action>
 		
-		<action name="removeSanPham" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="removeSanPham">
+		<action name="removeDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="removeDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="addKeyword" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="addKeyword">
+		<action name="addDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="addDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>
 		</action>
 		
-		<action name="getAllSanPham" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="getAllSanPham">
+		<action name="getAllDichVu" class="com.vangbacdaquy.action.QuanLyDichVuAction" method="getAllDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>

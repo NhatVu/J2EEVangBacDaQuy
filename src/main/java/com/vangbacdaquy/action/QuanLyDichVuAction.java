@@ -59,7 +59,7 @@ public class QuanLyDichVuAction extends AbstractAction{
 		return "success";
 	}
 	
-	public String updateSanPham(){
+	public String updateDichVu(){
 	    result.put("error", true);
         result.put("message", "Cập nhật thất bại!");
         try {
@@ -81,7 +81,7 @@ public class QuanLyDichVuAction extends AbstractAction{
         return "json";
 	}
 	
-	public String removeSanPham(){
+	public String removeDichVu(){
 	    result.put("error", true);
         result.put("message", "Xoá sản phẩm thất bại!");
         try {   
@@ -102,12 +102,13 @@ public class QuanLyDichVuAction extends AbstractAction{
         return "json";
 	}
 	
-	public String addKeyword(){
+	public String addDichVu(){
         result.put("error", true);
         result.put("message", "Thêm mới thất bại!");
         try {
 
             DichVuDTO dv = new DichVuDTO();
+            maDV = dvDAO.getNexId();
             dv.setMaDV(maDV);
             dv.setTenDV(tenDV);
             dv.setDonGia(donGia);
@@ -124,7 +125,7 @@ public class QuanLyDichVuAction extends AbstractAction{
         return "json";
     }
 	
-	public String getAllSanPham(){
+	public String getAllDichVu(){
 	    result.put("error", true);
 	    List<DichVuDTO> listSanPham = new ArrayList<DichVuDTO>();
 	    try {
