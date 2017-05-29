@@ -98,19 +98,22 @@
 														<th>Số luợng</th>
 														<th>Đơn giá bán</th>
 														<th>Thành tiền</th>
+														<th><a href="javascript:void(0)" id="themSanPham"><i
+																	class="fa fa-plus-square"></i>  Thêm sản phẩm</a> </th>
 													</tr>
 												</thead>
 												<tbody id ="tablePhieuBanHang">
-														<tr>
+														<tr id="row-1">
 															<td style="width: 200px;">
-																<select id="danhSachSanPham" class="selectpicker">
+																<select class="selectSanPham form-control">
 																	<option value="-1">-Chọn sản phẩm-</option>
 																</select>
 															</td>
-															<td style="width: 200px;"> <input type="number" oninput="tinhTien(this.value);" class="form-control"></td>
+															<td style="width: 200px;"> <input type="number" oninput="tinhTien(this);" class="form-control"></input></td>
 															<td></td>
 															<td></td>
-															<td></td>
+															<td><a   style="color: #dd4b39;" href="javascript:void(0)" id="xoaSanPham"><i
+																	class="fa fa-remove"></i>  Xóa sản phẩm</a></td>
 														</tr>
 												</tbody>
 											</table>
@@ -129,12 +132,19 @@
 			<!-- /.box -->
 				<div class="container customer-infor">
 					<div class="row">
-						<div class="col-md-2"><button id="themSanPham" type="button" class="btn btn-primary btn-block">Thêm sản phẩm</button></div>
-						<div class="col-md-2"><button id="xoaSanPham" type="button" class="btn btn-danger btn-block">Xóa sản phẩm</button></div>
-						<div class="col-md-2"></div>
+						<div class="col-md-6"></div>
 						<div id="tongCong" class="col-md-1"><strong>Tổng cộng</strong></div>
 						<div class="col-md-3">
-							<input type="text" disabled="disabled" class="form-control">
+							<input type="text" id="tongtien" disabled="disabled" class="form-control">
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-3"></div>
+						<div class="col-md-2"><button id="xoaSanPham" type="button" class="btn btn-info btn-block">Tạo mới phiếu</button></div>
+						<div class="col-md-3">
+							<button id="luuPhieu" type="button" class="btn btn-primary btn-block">Lưu phiếu bán hàng</button>
 						</div>
 					</div>
 				</div>
@@ -167,6 +177,7 @@
 		var danhSachSanPham = null;
 		var tempRow = "";
 		getListSanPham();
+		bindingEventSelect();
 	});
 		$("#ngayBan").val(moment().format("DD/MM/YYYY"));
 		
@@ -188,7 +199,7 @@
 		$("#kiemtra").click(function(){
 			$.LoadingOverlay("show");
 			$("#message").css("display","none");
-			var maKH = $("#maKhachHang").val();
+			var maKH = $("#maKhachHang").val();selectpicker
 			$.ajax({
 			    url: 'checkKhachQuen?maKH='+maKH,
 			    type: 'GET',
@@ -215,14 +226,14 @@
 			    type: 'POST',
 			    success: function(data) {
 			    		var list = data.data;
-			    		$("#danhSachSanPham").html("");
+			    		$(".selectSanPham").html("");
 			    		var content = "";
 			    		content += "<option  value='-1'>-Chọn sản phẩm-</option>";
 			    		for(var i = 0; i < list.length; i++){
 			    			content += "<option  value='"+list[i].maSP+"'>"+ list[i].tenSP +"</option>";
 			    		}
-			    		$("#danhSachSanPham").html(content);
-			    		$('.selectpicker').selectpicker('refresh');
+			    		$(".selectSanPham").html(content);
+// 			    		$('.selectSanPham').selectpicker('refresh');
 			    		tempRow = $("#tablePhieuBanHang").children("tr:nth-child(1)").html();
 			    		danhSachSanPham = list;
 			    },
@@ -232,17 +243,7 @@
 			  });
 			$.LoadingOverlay("hide");
 		}
-		
-		
-		$('#danhSachSanPham').on('changed.bs.select', function (e) {
-			 var id = $("#danhSachSanPham").selectpicker('val');
-			 console.log(id);
-			 var sp = getProduct(id);
-			 console.log("San pham: " + sp);
-			 console.log(this);
-			 var donGiaBan = getTdTable(3);
-			 donGiaBan.html(sp == null ? "" : sp.donGiaBan);
-			});
+
 		$("#themSanPham").click(function(){
 			themDongMoi();
 		});
@@ -254,23 +255,163 @@
 			return null;
 		}
 		
-		function getTdTable(index){
-			return $("#danhSachSanPham").closest("tr").children("td:nth-child("+index+")");
+		function getTdTable(e, index){
+			return $(e.target.closest('tr')).children("td:nth-child("+index+")");
 		}
 		
-		function tinhTien(soLuong){
-			var thanhTien = getTdTable(4);
-			var donGia = getTdTable(3).html();
+		function getTdTableByThis(e, index){
+			return $(e.closest('tr')).children("td:nth-child("+index+")");
+		}
+		
+		function getTdTableByParent(e, index){
+			return document.getElementById(e).children[index].textContent.trim();
+		}
+		
+		function tinhTien(e){
+			var soLuong = e.value;
+			$(e).html(e.value).change();
+			$(e).val(e.value).change();
+			console.log(e);
+			var thanhTien = getTdTableByThis(e, 4);
+			var donGia = getTdTableByThis(e, 3).html();
 			thanhTien.html(soLuong*Number(donGia));
+			tongTien();
+		}
+		
+		function tongTien(){
+			var listTr =  $("#tablePhieuBanHang").children("tr");
+			var sum = 0;
+			for(var i = 0; i< listTr.length; i++){
+				sum += Number(getTdTableByThis(listTr[i], 4).html());
+			}
+			$("#tongtien").val(sum);
 		}
 		
 		function themDongMoi(){
-
-			var newRow = '<tr>'+
+			var index = $("#tablePhieuBanHang").children("tr").length + 1;
+			var newRow = '<tr id="row-' + index +'" >'+
 							tempRow
 							'</tr>';
 				
 			$("#tablePhieuBanHang").append(newRow);
+			bindingEventSelect();
+			
+		}
+		function bindingEventSelect(){
+			$('.selectSanPham').on('change', function (e) {
+				console.log(e);
+				 var id = e.target.value;
+				 console.log(id);
+				 var sp = getProduct(id);
+				 console.log("San pham: " + sp);
+				 console.log(this);
+				 var donGiaBan = getTdTable(e, 3);
+				 donGiaBan.html(sp == null ? "" : sp.donGiaBan);
+				});
+		}
+		
+		function getListSPBanHang(){
+			var list = $("#tablePhieuBanHang").children("tr");
+			var listSP = new Array();
+			for(var i =  0; i < list.length; i++){
+				var object = list[i];
+				var SanPhamDTO = new Object();
+				var maSP = $($(object).children("td")[0]).children("select")[0].value;
+				if(maSP != -1){
+				console.log("maSP: " + maSP);
+				var soLuong = $($(object).children("td")[1]).children("input")[0].value;
+				console.log("soLuong: " + soLuong);
+				SanPhamDTO.maSP = maSP;
+				SanPhamDTO.soLuong = soLuong;
+				listSP.push(SanPhamDTO);
+				}
+				console.log(listSP);
+			}
+			return listSP;
+		}
+		
+		function luuPhieuBanHang(){
+			var listSP = new Array();
+			listSP = getListSPBanHang();
+			listSP["_varname_"] = "listSP";
+			listSP = getSimpleObject(listSP);
+			$.LoadingOverlay("show");
+			$.ajax({
+			    url: 'luuPhieuBanHang',
+			    type: 'POST',
+			    async: false,
+			    data: listSP,
+			    success: function(data) {
+			    	$("#txtMessage").css("display","block");
+			    	if(data.error == false){
+
+			    	}else{
+			    	}
+			    },
+			    error: function(xhr, ajaxOptions, thrownError){
+			    	console.log(thrownError);
+			    }
+			  });
+			$.LoadingOverlay("hide");
+		}
+		
+		function convertToSimpleObject(out, obj, prefix){
+		    if (obj instanceof Array){
+		        for (var index=0; index < obj.length; index++){
+		            var item = obj[index];
+		            var tmpPrefix = prefix + "[" + index + "]";
+		            if (item instanceof Array || item instanceof Object){
+		                arguments.callee(out, item, tmpPrefix);
+		            } else {
+		                out[tmpPrefix] = item;
+		            }
+		        }
+		    } else if (obj instanceof Object){
+		    	for(var propName in obj){
+					if (propName.toString() !== "_varname_"){
+						var tmpPrefix;
+						if (prefix && prefix.length > 0) {
+							tmpPrefix = prefix + "." + propName;
+						} else {
+							tmpPrefix = propName;
+						}
+						var item = obj[propName];
+						if (item instanceof Array || item instanceof Object){
+							arguments.callee(out, item, tmpPrefix);
+						} else if (item != undefined && item != null) {
+							out[tmpPrefix] = item;
+						}
+					}
+		        }        
+		    }
+		}
+		function getPrefix(data){
+			var prefix = null;
+			try{
+				data.hasOwnProperty("_varname_");
+			} catch(e){
+				throw 'Please check your data or browser support.';
+			}
+			if (data.hasOwnProperty("_varname_")){
+				try{
+					prefix = data["_varname_"];
+					delete data["_varname_"];
+				} catch(e){
+				}
+			} else {
+				throw 'Missing "_varname_". Please check your data.';
+			}
+			if (prefix === null || prefix === undefined || prefix.toString().trim().length === 0){
+				throw 'Missing "_varname_". Please check your data.';
+			}
+			return prefix;
+		}
+		
+		function getSimpleObject(data){
+			var prefix = getPrefix(data);
+			var out = {};
+			convertToSimpleObject(out, data, prefix);
+			return out;
 		}
 		</script>
 

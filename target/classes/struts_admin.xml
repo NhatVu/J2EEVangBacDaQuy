@@ -179,6 +179,19 @@
 				<param name="root">result</param>
 			</result>	
 		</action>
+
+		<action name="luuPhieuBanHang" class="com.vangbacdaquy.action.QuanLyBanHangAction"
+			method="luuPhieuBanHang">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+		<action name="checkKhachQuen" class="com.vangbacdaquy.action.QuanLyBanHangAction"
+			method="checkKhachQuen">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
 		
 		<!-- Crawler link -->		
 		<action name="CrawlUrl" class="com.vangbacdaquy.action.QuanLySanPhamAction">

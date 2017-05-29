@@ -68,7 +68,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$(".main-sidebar .admin-treeview").addClass("active");
-			$(".main-sidebar .editor-treeview").removeClass("active");
+			$(".main-sidebar .editor-treeview").removeClass("active");			
 		})
 	</script>
 	
