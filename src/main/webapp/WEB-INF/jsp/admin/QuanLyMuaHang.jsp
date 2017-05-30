@@ -15,7 +15,7 @@
 			<section class="content-header">
 					<div class="row text-center">
 						<h4 style="margin-bottom: 25px !important;">
-							Phiếu bán hàng
+							Phiếu mua hàng
 						</h4>
 					</div>
 				<hr/>
@@ -144,7 +144,7 @@
 						<div class="col-md-3"></div>
 						<div class="col-md-2"><button id="taoMoiPhieu" type="button" class="btn btn-info btn-block">Tạo mới phiếu</button></div>
 						<div class="col-md-3">
-							<button id="luuPhieu" type="button" class="btn btn-primary btn-block">Lưu phiếu bán hàng</button>
+							<button id="luuPhieu" type="button" class="btn btn-primary btn-block">Lưu phiếu mua hàng</button>
 						</div>
 					</div>
 				</div>
@@ -186,7 +186,7 @@
 		$("#layMaKH").click(function(){
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'getNextCustomerId',
+			    url: 'mhgetNextCustomerId',
 			    type: 'POST',
 			    success: function(data) {
 			    		$("#maKhachHang").val(data.data);
@@ -203,7 +203,7 @@
 			$("#message").css("display","none");
 			var maKH = $("#maKhachHang").val();
 			$.ajax({
-			    url: 'checkKhachQuen?maKH='+maKH,
+			    url: 'mhcheckKhachQuen?maKH='+maKH,
 			    type: 'GET',
 			    success: function(data) {
 			    	if(data.error == false){
@@ -250,7 +250,7 @@
 			themDongMoi();
 		});
 		$("#taoMoiPhieu").click(function(){
-			location.href = "/VangBacDaQuy/admin/quanlybanhang";
+			location.href = "/VangBacDaQuy/admin/quanlymuahang";
 		});
 		$("#luuPhieu").click(function(){
 			luuPhieuBanHang();
@@ -367,7 +367,7 @@
 			o.tongTien = $("#tongtien").val();
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'luuPhieuBanHang?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
+			    url: 'mhluuPhieuMuaHang?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
 			    type: 'POST',
 			    async: false,
 			    data: listSP,
