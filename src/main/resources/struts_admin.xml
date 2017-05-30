@@ -186,8 +186,29 @@
 				<param name="root">result</param>
 			</result>	
 		</action>
-		<action name="checkKhachQuen" class="com.vangbacdaquy.action.QuanLyBanHangAction"
+		
+		<!-- Quan ly mua hang-->
+
+		<action name="quanlymuahang" class="com.vangbacdaquy.action.QuanLyMuaHangAction">
+			<result name="success">/WEB-INF/jsp/admin/QuanLyMuaHang.jsp</result>
+		</action>
+		
+		<action name="mhgetNextCustomerId" class="com.vangbacdaquy.action.QuanLyMuaHangAction"
+			method="getNextCustomerId">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+		
+		<action name="mhcheckKhachQuen" class="com.vangbacdaquy.action.QuanLyMuaHangAction"
 			method="checkKhachQuen">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+
+		<action name="mhluuPhieuMuaHang" class="com.vangbacdaquy.action.QuanLyMuaHangAction"
+			method="luuPhieuMuaHang">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	

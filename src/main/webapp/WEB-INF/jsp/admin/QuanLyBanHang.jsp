@@ -201,7 +201,7 @@
 		$("#kiemtra").click(function(){
 			$.LoadingOverlay("show");
 			$("#message").css("display","none");
-			var maKH = $("#maKhachHang").val();selectpicker
+			var maKH = $("#maKhachHang").val();
 			$.ajax({
 			    url: 'checkKhachQuen?maKH='+maKH,
 			    type: 'GET',

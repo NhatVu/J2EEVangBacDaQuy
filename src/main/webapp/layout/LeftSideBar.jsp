@@ -18,6 +18,7 @@
 			                    <li><a href="/VangBacDaQuy/admin/quanlysanpham"><i class="fa fa-circle-o"></i>Quản lý sản phẩm</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/quanlydichvu"><i class="fa fa-circle-o"></i>Quản lý dịch vụ</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/quanlybanhang"><i class="fa fa-circle-o"></i>Quản lý bán hàng</a></li>
+			                    <li><a href="/VangBacDaQuy/admin/quanlymuahang"><i class="fa fa-circle-o"></i>Quản lý mua hàng</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/GoCrawlTweet"><i class="fa fa-circle-o"></i>Crawl Twitter</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/GoPrepareData"><i class="fa fa-circle-o"></i>Prepare Data</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/GoPreprocessData"><i class="fa fa-circle-o"></i>Preprocess Data</a></li>

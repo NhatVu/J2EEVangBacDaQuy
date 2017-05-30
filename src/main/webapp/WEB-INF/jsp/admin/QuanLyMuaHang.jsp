@@ -15,7 +15,7 @@
 			<section class="content-header">
 					<div class="row text-center">
 						<h4 style="margin-bottom: 25px !important;">
-							Phiếu bán hàng
+							Phiếu mua hàng
 						</h4>
 					</div>
 				<hr/>
@@ -186,7 +186,7 @@
 		$("#layMaKH").click(function(){
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'getNextCustomerId',
+			    url: 'mhgetNextCustomerId',
 			    type: 'POST',
 			    success: function(data) {
 			    		$("#maKhachHang").val(data.data);
@@ -201,9 +201,9 @@
 		$("#kiemtra").click(function(){
 			$.LoadingOverlay("show");
 			$("#message").css("display","none");
-			var maKH = $("#maKhachHang").val();selectpicker
+			var maKH = $("#maKhachHang").val();
 			$.ajax({
-			    url: 'checkKhachQuen?maKH='+maKH,
+			    url: 'mhcheckKhachQuen?maKH='+maKH,
 			    type: 'GET',
 			    success: function(data) {
 			    	if(data.error == false){
@@ -250,7 +250,7 @@
 			themDongMoi();
 		});
 		$("#taoMoiPhieu").click(function(){
-			location.href = "/VangBacDaQuy/admin/quanlybanhang";
+			location.href = "/VangBacDaQuy/admin/quanlymuahang";
 		});
 		$("#luuPhieu").click(function(){
 			luuPhieuBanHang();
@@ -367,7 +367,7 @@
 			o.tongTien = $("#tongtien").val();
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'luuPhieuBanHang?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
+			    url: 'mhluuPhieuMuaHang?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
 			    type: 'POST',
 			    async: false,
 			    data: listSP,
