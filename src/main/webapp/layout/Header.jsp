@@ -40,6 +40,10 @@
 <!-- Date Picker -->
 <link rel="stylesheet" href="/VangBacDaQuy/plugins/datepicker/datepicker3.css">
 <link rel="stylesheet" href="/VangBacDaQuy/css/style.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+
+
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

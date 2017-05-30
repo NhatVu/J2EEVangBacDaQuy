@@ -19,6 +19,7 @@ public class SanPhamDTO {
     private double donGiaMua = 0;
     private double donGiaBan = 0;
     private int soLuongTon = 0;
+    private int soLuong = 0;
 
     /*
      * Constructor
@@ -79,12 +80,21 @@ public class SanPhamDTO {
         this.soLuongTon = soLuongTon;
     }
 
+    public int getSoLuong() {
+        return soLuong;
+    }
+    
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+    
     @Override
     public String toString() {
         return "SanPhamDTO [maSP=" + maSP + ", tenSP=" + tenSP + ", donGiaMua="
                 + donGiaMua + ", donGiaBan=" + donGiaBan + ", soLuongTon="
                 + soLuongTon + "]";
     }
+
 
     
 }

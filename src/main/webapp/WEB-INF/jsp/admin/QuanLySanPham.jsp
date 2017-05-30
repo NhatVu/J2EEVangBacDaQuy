@@ -313,6 +313,7 @@
 				object.donGiaBan = donGiaBan;
 				object.soLuongTon = soLuongTon;
 				console.log("keyword: " + object);
+				$.LoadingOverlay("show");
 				$.ajax({
 				    url: 'addKeyword',
 				    type: 'POST',

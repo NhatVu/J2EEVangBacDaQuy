@@ -185,7 +185,7 @@ public class SanPhamDAO extends SuperDAO {
 
 		try {
 			this.getConnection();
-			String sql = "update sanpham set SOLUONGTON = ? where MASP = ?";
+			String sql = "update SANPHAM set SOLUONGTON = ? where MASP = ?";
 
 			preparedStatement = connection.prepareStatement(sql);
 
