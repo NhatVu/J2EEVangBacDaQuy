@@ -144,7 +144,7 @@
 						<div class="col-md-3"></div>
 						<div class="col-md-2"><button id="taoMoiPhieu" type="button" class="btn btn-info btn-block">Tạo mới phiếu</button></div>
 						<div class="col-md-3">
-							<button id="luuPhieu" type="button" class="btn btn-primary btn-block">Lưu phiếu bán hàng</button>
+							<button id="luuPhieu" type="button" class="btn btn-primary btn-block">Lưu phiếu mua hàng</button>
 						</div>
 					</div>
 				</div>
