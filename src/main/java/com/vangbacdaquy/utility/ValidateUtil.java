@@ -536,4 +536,7 @@ public class ValidateUtil {
 	        return matchFound;
 	    }
 	
+	    public static boolean checkMaxLength(String s, int maxLength){
+	        return (s.trim().length() - maxLength) > 0 ? true : false;
+	    }
 }

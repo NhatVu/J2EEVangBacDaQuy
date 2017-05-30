@@ -23,8 +23,8 @@
 			<section class="content">
 			<div class="container customer-infor">
 				<div class="row">
-					<div id="maPhieu" class="col-md-1">Mã phiếu</div>
-					<div class="col-md-3"> <input type="text" disabled="disabled" class="form-control" value='<s:property value="maPhieu"/>'></div>
+					<div class="col-md-1">Mã phiếu</div>
+					<div class="col-md-3"> <input id="maPhieu" type="text" disabled="disabled" class="form-control" value='<s:property value="maPhieu"/>'></div>
 					<div class="col-md-2"></div>
 					<div class="col-md-1"></div>
 					<div class="col-md-3"></div>
@@ -109,10 +109,10 @@
 																	<option value="-1">-Chọn sản phẩm-</option>
 																</select>
 															</td>
-															<td style="width: 200px;"> <input type="number" oninput="tinhTien(this);" class="form-control"></input></td>
+															<td style="width: 200px;"> <input type="number" oninput="tinhTien(this);" class="form-control inputSoLuong"></input></td>
 															<td></td>
 															<td></td>
-															<td><a   style="color: #dd4b39;" href="javascript:void(0)" id="xoaSanPham"><i
+															<td><a   style="color: #dd4b39;" href="javascript:void(0)" id="xoaSanPham" onClick="xoaMotDong(this)"><i
 																	class="fa fa-remove"></i>  Xóa sản phẩm</a></td>
 														</tr>
 												</tbody>
@@ -132,7 +132,7 @@
 			<!-- /.box -->
 				<div class="container customer-infor">
 					<div class="row">
-						<div class="col-md-6"></div>
+						<div class="col-md-6"><p id="messageInfo" class="" style="display: none"></p></div>
 						<div id="tongCong" class="col-md-1"><strong>Tổng cộng</strong></div>
 						<div class="col-md-3">
 							<input type="text" id="tongtien" disabled="disabled" class="form-control">
@@ -142,7 +142,7 @@
 					<div class="row">
 						<div class="col-md-2"></div>
 						<div class="col-md-3"></div>
-						<div class="col-md-2"><button id="xoaSanPham" type="button" class="btn btn-info btn-block">Tạo mới phiếu</button></div>
+						<div class="col-md-2"><button id="taoMoiPhieu" type="button" class="btn btn-info btn-block">Tạo mới phiếu</button></div>
 						<div class="col-md-3">
 							<button id="luuPhieu" type="button" class="btn btn-primary btn-block">Lưu phiếu bán hàng</button>
 						</div>
@@ -178,6 +178,8 @@
 		var tempRow = "";
 		getListSanPham();
 		bindingEventSelect();
+		bindingEventInput();
+		$('#luuPhieu').prop('disabled', false);
 	});
 		$("#ngayBan").val(moment().format("DD/MM/YYYY"));
 		
@@ -247,6 +249,12 @@
 		$("#themSanPham").click(function(){
 			themDongMoi();
 		});
+		$("#taoMoiPhieu").click(function(){
+			location.href = "/VangBacDaQuy/admin/quanlybanhang";
+		});
+		$("#luuPhieu").click(function(){
+			luuPhieuBanHang();
+		});
 		
 		function getProduct(maSP){
 			for(var i = 0; i < danhSachSanPham.length; i++){
@@ -295,7 +303,11 @@
 				
 			$("#tablePhieuBanHang").append(newRow);
 			bindingEventSelect();
-			
+			bindingEventInput();
+		}
+		
+		function xoaMotDong(a){
+			$(a).closest("tr").remove();
 		}
 		function bindingEventSelect(){
 			$('.selectSanPham').on('change', function (e) {
@@ -308,6 +320,15 @@
 				 var donGiaBan = getTdTable(e, 3);
 				 donGiaBan.html(sp == null ? "" : sp.donGiaBan);
 				});
+		}
+		
+		function bindingEventInput(){
+			$(".inputSoLuong").keypress(function(event){
+			    var keycode = (event.keyCode ? event.keyCode : event.which);
+			    if(keycode == '13'){
+			    	themDongMoi();
+			    }
+			});
 		}
 		
 		function getListSPBanHang(){
@@ -331,21 +352,36 @@
 		}
 		
 		function luuPhieuBanHang(){
+			$("#messageInfo").css("display", "none");
 			var listSP = new Array();
 			listSP = getListSPBanHang();
 			listSP["_varname_"] = "listSP";
 			listSP = getSimpleObject(listSP);
+			var o = new Object();
+			o.maPhieu = $("#maPhieu").val();
+			o.ngayBan = $("#ngayBan").val();
+			o.ngayThanhToan = $("#ngayThanhToan").val();
+			o.maKhachHang = $("#maKhachHang").val();
+			o.hoTen = $("#hoten").val();
+			o.diaChi = $("#diaChi").val();
+			o.tongTien = $("#tongtien").val();
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'luuPhieuBanHang',
+			    url: 'luuPhieuBanHang?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
 			    type: 'POST',
 			    async: false,
 			    data: listSP,
 			    success: function(data) {
-			    	$("#txtMessage").css("display","block");
+			    	$("#messageInfo").css("display", "block");
+					$("#messageInfo").html(data.message);
+					$("#messageInfo")
 			    	if(data.error == false){
-
+			    		$("#messageInfo").remove("label-danger");
+			    		$("#messageInfo").addClass("label-success");
+			    		$('#luuPhieu').prop('disabled', true);
 			    	}else{
+			    		$("#messageInfo").addClass("label-danger");
+			    		$("#messageInfo").remove("label-success");
 			    	}
 			    },
 			    error: function(xhr, ajaxOptions, thrownError){
