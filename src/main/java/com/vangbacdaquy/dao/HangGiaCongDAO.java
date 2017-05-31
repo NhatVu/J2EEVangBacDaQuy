@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.vangbacdaquy.dto.DichVuDTO;
 import com.vangbacdaquy.dto.HangGiaCongDTO;
 import com.vangbacdaquy.dto.NguoiDTO;
 
@@ -72,7 +73,8 @@ public class HangGiaCongDAO extends SuperDAO {
 			call.setString(tenLoaiGiaCong, n.getTenLoaiGC());
 			call.setDouble(donGia, n.getDonGia());
 
-			return call.execute();
+			if(call.executeUpdate() > 0)
+                return true;
 
 		} catch (SQLException ex) {
 			Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
@@ -109,6 +111,30 @@ public class HangGiaCongDAO extends SuperDAO {
 		}
 		return false;
 	}
+	
+	public boolean delete(HangGiaCongDTO hgc) {
+        try {
+            this.getConnection();
+            call = connection.prepareCall("{call HANGGIACONG_Del(?)}");
+            call.setInt("MALOAIGC", hgc.getMaLoaiGC());
+
+            if(call.executeUpdate() > 0)
+                return true;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TAG).log(Level.SEVERE,
+                    null, ex);
+        } finally {
+            if (connection != null)
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TAG).log(
+                            Level.SEVERE, null, ex);
+                }
+        }
+        return false;
+    }
 
 	public ArrayList<HangGiaCongDTO> getAllHangGiaCong() {
 		try {
@@ -139,4 +165,42 @@ public class HangGiaCongDAO extends SuperDAO {
 		}
 		return null;
 	}
+	
+	public int getLastID() {
+        try {
+            this.getConnection();
+            call = connection.prepareCall("{call HANGGIACONG_getLastID(?)}");
+            call.registerOutParameter(1, java.sql.Types.VARCHAR);
+
+            call.execute();
+            return call.getInt(1);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TAG).log(Level.SEVERE,
+                    null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TAG).log(
+                            Level.SEVERE, null, ex);
+                }
+            }
+
+            try {
+                call.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(TAG).log(
+                        Level.SEVERE, null, ex);
+            }
+        }
+
+        return 0;
+    }
+
+    public int getNexId() {
+        return getLastID() + 1;
+
+    }
 }

@@ -17,6 +17,7 @@
 			                <ul class="treeview-menu">
 			                    <li><a href="/VangBacDaQuy/admin/quanlysanpham"><i class="fa fa-circle-o"></i>Quản lý sản phẩm</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/quanlydichvu"><i class="fa fa-circle-o"></i>Quản lý dịch vụ</a></li>
+			                    <li><a href="/VangBacDaQuy/admin/quanlyhanggiacong"><i class="fa fa-circle-o"></i>Quản lý hàng gia công</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/quanlybanhang"><i class="fa fa-circle-o"></i>Lập phiếu bán hàng</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/quanlymuahang"><i class="fa fa-circle-o"></i>Lập phiếu mua hàng</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/lapphieudichvu"><i class="fa fa-circle-o"></i>Lập phiếu dịch vụ</a></li>
