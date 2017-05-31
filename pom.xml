@@ -311,10 +311,6 @@
 							<!-- <include>*.txt</include> -->
 							<targetPath>resource</targetPath>
 						</resource>
-						<resource>
-							<directory>training_data</directory>
-							<targetPath>training_data</targetPath>
-						</resource>
 					</webResources>
 				</configuration>
 			</plugin>

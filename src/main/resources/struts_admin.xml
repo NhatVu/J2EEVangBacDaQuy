@@ -304,5 +304,21 @@
 			<result name="success">/WEB-INF/jsp/admin/TrackingTweet.jsp</result>
 		</action>
 		
+			<!-- Lich su mua hang -->
+
+		<action name="lichsumuahang" class="com.vangbacdaquy.action.LichSuMuaHangAction">
+			<result name="success">/WEB-INF/jsp/admin/LichSuMuaHang.jsp</result>
+		</action>
+		
+		<action name="getAllPhieuMuaHang" class="com.vangbacdaquy.action.LichSuMuaHangAction" method="getAllPhieuMuaHang">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getCTPMuaHangByMaPMH" class="com.vangbacdaquy.action.LichSuMuaHangAction" method="getCTPMuaHangByMaPMH">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

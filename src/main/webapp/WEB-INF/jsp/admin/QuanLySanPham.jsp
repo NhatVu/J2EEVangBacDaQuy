@@ -89,62 +89,7 @@
 		
 	</div>
 		
-			<!-- Model keyword -->
-			<div id="modelShowKW" class="modal modal-wide fade ">
-				<div class="modal-dialog" style="width: 800px;">
-					<div class="modal-content" >
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title">Keywords Set</h4>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-xs-12">
-									<div class="box" style="border: none !important;">
-										<div class="box-body">
-											<table id="tableKW"
-												class="table table-bordered table-striped">
-												<thead>
-													<tr>
-														<th>Id</th>
-														<th>Topic</th>
-														<th>Keywords</th>
-														<th>Action <a href="javascript:void(0)" id="btnAddKW"><i
-																	class="fa fa-plus-square"></i> Add</a> </th>
-													</tr>
-												</thead>
-<!-- 												<tbody> -->
-<%-- 													<s:iterator value="listKeyword"> --%>
-<!-- 														<tr> -->
-<%-- 															<td><s:property value="id"/></td> --%>
-<%-- 															<td style="width: 200px;"><s:property value="key" /></td> --%>
-<%-- 															<td><s:property value="value" /></td> --%>
-<!-- 															<td><a href="javascript:void(0)" onClick="editKeyword(this);"><i -->
-<!-- 																	class="fa fa-edit"></i> Edit</a></td> -->
-<!-- 														</tr> -->
-<%-- 													</s:iterator> --%>
-<!-- 												</tbody> -->
-											</table>
-										</div>
-										<!-- /.box-body -->
-									</div>
-									<!-- /.box -->
-								</div>
-								<!-- /.col -->
-							</div>
-							<!-- /.row -->
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Close</button>
-<!-- 							<button type="button" class="btn btn-primary">Save -->
-<!-- 								changes</button> -->
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- .Modal keywords -->
+
 			
 			
 			<!-- Modal edit keyword -->
@@ -153,7 +98,7 @@
 				<div class="modal-dialog" style="margin-top: 150px;">
 					<div class="modal-content">
 						<div id="txtMessage" class="alert" style="display:none;">
-							Cập nhật keyword thành công!
+							Cập nhật sản phẩm thành công!
 						</div>
 						<div class="modal-header modal-header-remove">
 							<button type="button" class="close" data-dismiss="modal"
@@ -276,11 +221,11 @@
 			
 			function updateKeyword(maSp, tenSP, donGiaMua, donGiaBan, soLuongTon){
 				var object = new Object();
-				object.maSP = maSp;
+				object.maSP = parseInt(maSp);
 				object.tenSP = tenSP;
-				object.donGiaMua = donGiaMua;
-				object.donGiaBan = donGiaBan;
-				object.soLuongTon = soLuongTon;
+				object.donGiaMua = parseInt(donGiaMua);
+				object.donGiaBan = parseInt(donGiaBan);
+				object.soLuongTon = parseInt(soLuongTon);
 				console.log("keyword: " + object);
 				$.ajax({
 				    url: 'updateSanPham',
@@ -313,7 +258,7 @@
 				object.donGiaBan = donGiaBan;
 				object.soLuongTon = soLuongTon;
 				console.log("keyword: " + object);
-				$.LoadingOverlay("show");
+				//$.LoadingOverlay("show");
 				$.ajax({
 				    url: 'addKeyword',
 				    type: 'POST',
@@ -355,6 +300,8 @@
 				$("#txtMessage").css("display","none");
 				$("#txtMaSanPham").prop('disabled', true);
 				$(".modal-header-remove").css("display","none");
+	    		$("#btnUpdateKW").css("display","");
+
 				$("#txtMaSanPham").val('');
 				$("#txtTenSanPham").val('');
 				$("#txtDonGiaMua").html('');

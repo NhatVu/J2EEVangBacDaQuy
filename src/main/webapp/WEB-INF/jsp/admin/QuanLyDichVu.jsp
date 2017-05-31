@@ -339,6 +339,7 @@
 				$("#txtMessage").css("display","none");
 				$("#txtMaDichVu").prop('disabled', true);
 				$(".modal-header-remove").css("display","none");
+	    		$("#btnUpdateKW").css("display","");
 				$("#txtMaDichVu").val('');
 				$("#txtTenDichVu").val('');
 				$("#txtDonGia").html('');

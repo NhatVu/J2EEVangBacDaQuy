@@ -49,7 +49,8 @@ public class HangGiaCongDAO extends SuperDAO {
 			call.setString(tenLoaiGiaCong, n.getTenLoaiGC());
 			call.setDouble(donGia, n.getDonGia());
 
-			return call.execute();
+			if(call.executeUpdate() > 0)
+                return true;
 
 		} catch (SQLException ex) {
 			Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
@@ -96,7 +97,8 @@ public class HangGiaCongDAO extends SuperDAO {
 			call = connection.prepareCall(deleteStatement);
 			call.setInt(maLoaiGiaCong, n.getMaLoaiNguoi());
 
-			return call.execute();
+			if(call.executeUpdate() > 0)
+                return true;
 
 		} catch (SQLException ex) {
 			Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
