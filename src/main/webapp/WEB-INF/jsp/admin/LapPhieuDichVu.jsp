@@ -176,7 +176,7 @@
 		});
 		var danhSachSanPham = null;
 		var tempRow = "";
-		getListSanPham();
+		getListDichVu();
 		bindingEventSelect();
 		bindingEventInput();
 		$('#luuPhieu').prop('disabled', false);
@@ -186,7 +186,7 @@
 		$("#layMaKH").click(function(){
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'getNextCustomerId',
+			    url: 'dvgetNextCustomerId',
 			    type: 'POST',
 			    success: function(data) {
 			    		$("#maKhachHang").val(data.data);
@@ -203,7 +203,7 @@
 			$("#message").css("display","none");
 			var maKH = $("#maKhachHang").val();
 			$.ajax({
-			    url: 'checkKhachQuen?maKH='+maKH,
+			    url: 'dvcheckKhachQuen?maKH='+maKH,
 			    type: 'GET',
 			    success: function(data) {
 			    	if(data.error == false){
@@ -221,10 +221,10 @@
 			$.LoadingOverlay("hide");
 		})
 		
-		function getListSanPham(){
+		function getListDichVu(){
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'getAllSanPham',
+			    url: 'getAllDichVu',
 			    type: 'POST',
 			    success: function(data) {
 			    		var list = data.data;
@@ -232,7 +232,7 @@
 			    		var content = "";
 			    		content += "<option  value='-1'>-Chọn sản phẩm-</option>";
 			    		for(var i = 0; i < list.length; i++){
-			    			content += "<option  value='"+list[i].maSP+"'>"+ list[i].tenSP +"</option>";
+			    			content += "<option  value='"+list[i].maDV+"'>"+ list[i].tenDV +"</option>";
 			    		}
 			    		$(".selectSanPham").html(content);
 // 			    		$('.selectSanPham').selectpicker('refresh');
@@ -250,15 +250,15 @@
 			themDongMoi();
 		});
 		$("#taoMoiPhieu").click(function(){
-			location.href = "/VangBacDaQuy/admin/quanlybanhang";
+			location.href = "/VangBacDaQuy/admin/lapphieudichvu";
 		});
 		$("#luuPhieu").click(function(){
-			luuPhieuBanHang();
+			luuPhieuDichVu();
 		});
 		
-		function getProduct(maSP){
+		function getProduct(maDV){
 			for(var i = 0; i < danhSachSanPham.length; i++){
-				if(danhSachSanPham[i].maSP == maSP) return danhSachSanPham[i];
+				if(danhSachSanPham[i].maDV == maDV) return danhSachSanPham[i];
 			}
 			return null;
 		}
@@ -318,7 +318,7 @@
 				 console.log("San pham: " + sp);
 				 console.log(this);
 				 var donGiaBan = getTdTable(e, 3);
-				 donGiaBan.html(sp == null ? "" : sp.donGiaBan);
+				 donGiaBan.html(sp == null ? "" : sp.donGia);
 				});
 		}
 		
@@ -337,12 +337,12 @@
 			for(var i =  0; i < list.length; i++){
 				var object = list[i];
 				var SanPhamDTO = new Object();
-				var maSP = $($(object).children("td")[0]).children("select")[0].value;
-				if(maSP != -1){
-				console.log("maSP: " + maSP);
+				var maDV = $($(object).children("td")[0]).children("select")[0].value;
+				if(maDV != -1){
+				console.log("maSP: " + maDV);
 				var soLuong = $($(object).children("td")[1]).children("input")[0].value;
 				console.log("soLuong: " + soLuong);
-				SanPhamDTO.maSP = maSP;
+				SanPhamDTO.maDV = maDV;
 				SanPhamDTO.soLuong = soLuong;
 				listSP.push(SanPhamDTO);
 				}
@@ -351,11 +351,11 @@
 			return listSP;
 		}
 		
-		function luuPhieuBanHang(){
+		function luuPhieuDichVu(){
 			$("#messageInfo").css("display", "none");
 			var listSP = new Array();
 			listSP = getListSPBanHang();
-			listSP["_varname_"] = "listSP";
+			listSP["_varname_"] = "listDV";
 			listSP = getSimpleObject(listSP);
 			var o = new Object();
 			o.maPhieu = $("#maPhieu").val();
@@ -367,7 +367,7 @@
 			o.tongTien = $("#tongtien").val();
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'luuPhieuBanHang?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
+			    url: 'luuPhieuDichVu?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
 			    type: 'POST',
 			    async: false,
 			    data: listSP,

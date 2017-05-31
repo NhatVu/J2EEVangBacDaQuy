@@ -5,17 +5,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.vangbacdaquy.dto.CTP_BanHangDTO;
+import com.vangbacdaquy.dto.CTP_DichVuDTO;
+import com.vangbacdaquy.dto.DichVuDTO;
 import com.vangbacdaquy.dto.KhachHangDTO;
 import com.vangbacdaquy.dto.NguoiDTO;
-import com.vangbacdaquy.dto.P_BanHangDTO;
+import com.vangbacdaquy.dto.P_DichVuDTO;
 import com.vangbacdaquy.dto.P_ThuDTO;
-import com.vangbacdaquy.dto.SanPhamDTO;
-import com.vangbacdaquy.models.PhieuBanHangModel;
+import com.vangbacdaquy.models.PhieuDichVuModel;
 import com.vangbacdaquy.utility.ValidateUtil;
 
 
@@ -28,13 +27,13 @@ public class LapPhieuDichVuAction extends AbstractAction{
 	private String ngayThanhToan;
 	private String hoTen;
 	private String diaChi;
-	private List<SanPhamDTO> listSP = new ArrayList<SanPhamDTO>();
-	private PhieuBanHangModel pbhModel = new PhieuBanHangModel();
+	private List<DichVuDTO> listDV = new ArrayList<DichVuDTO>();
+	private PhieuDichVuModel pdvModel = new PhieuDichVuModel();
 
 	@Override
 	public void prepare() throws Exception {
 		super.prepare();
-		maPhieu = pbhModel.getNextIdOfPhieuBanHang();
+		maPhieu = pdvModel.getNextIdOfPhieuDichVu();
 	}
 	
 	@Override
@@ -58,7 +57,7 @@ public class LapPhieuDichVuAction extends AbstractAction{
 	    result.put("message", "Bạn không phải là khách quen");
 	    try {
 	        if(maKH != null && maKH > 0){
-	            NguoiDTO nguoiDTO = pbhModel.kiemTraKhachQuen(maKH);
+	            NguoiDTO nguoiDTO = pdvModel.kiemtraKhachQuen(maKH);
 	            if (nguoiDTO != null) {
 	                result.put("error", false);
 	                result.put("data", nguoiDTO);
@@ -73,7 +72,7 @@ public class LapPhieuDichVuAction extends AbstractAction{
 	    return "json";
 	}
 	
-	public String luuPhieuBanHang(){
+	public String luuPhieuDichVu(){
 	    String message = "";
         result.put("error", true);
         result.put("message", "Lưu phiếu hàng không thành công!");
@@ -85,62 +84,28 @@ public class LapPhieuDichVuAction extends AbstractAction{
                 result.put("message", message);
                 return "json";
             }
-            if (listSP != null && listSP.size() > 0) {
-                
-                // check tồn kho trước khi tạo phiếu
-                Map<Integer, SanPhamDTO> mapO = new HashMap<Integer, SanPhamDTO>();
-                for (SanPhamDTO sp : listSP) {
-                    Integer maSP = sp.getMaSP();
-                    for (SanPhamDTO sanPhamDTO : pbhModel.getAllSanPham()) {
-                        if (maSP==sanPhamDTO.getMaSP()) {
-                            sp.setTenSP(sanPhamDTO.getTenSP());
-                            sp.setDonGiaMua(sanPhamDTO.getDonGiaMua());
-                            sp.setSoLuongTon(sanPhamDTO.getSoLuongTon());
-                            sp.setDonGiaBan(sanPhamDTO.getDonGiaBan());
-                            break;
-                        }
-                    }
-                    if(mapO.get(maSP) != null){
-                        SanPhamDTO sanpham = mapO.get(maSP);
-                        int total = sanpham.getSoLuong() + sp.getSoLuong();
-                        sanpham.setSoLuong(total);
-                        mapO.put(maSP, sanpham);
-                    }else{
-                        mapO.put(maSP, sp);
-                    }
-                }
-                
-                for(Integer i : mapO.keySet()){
-                    SanPhamDTO sp = mapO.get(i);
-                    if(sp.getSoLuong() > sp.getSoLuongTon()){
-                        message = "Số lượng SP "+ sp.getTenSP() +" trong kho không đủ, hiện chỉ còn: " + sp.getSoLuongTon() +"\n";
-                    }
-                }
-                
-                if(message.length() != 0){
-                    result.put("message", message);
-                    return "json";
-                }
+            if (listDV != null && listDV.size() > 0) {
+
                 /*
                  * insert NguoiiDTO, KhachHangDTO
                  */
                 int shortId = maKH;
-                NguoiDTO nguoi = pbhModel.kiemTraKhachQuen(shortId);
+                NguoiDTO nguoi = pdvModel.kiemtraKhachQuen(shortId);
                 maKH = 0;
                 if (nguoi == null) {
-                    int nextNguoiId = pbhModel.getNextIdOfNguoi();
-                    maKH = pbhModel.getNextIdOfKhachHang();
+                    int nextNguoiId = pdvModel.getNextIdOfNguoi();
+                    maKH = pdvModel.getNextIdOfKhachHang();
                     NguoiDTO nguoiDTO = new NguoiDTO(nextNguoiId, hoTen, diaChi, shortId);
                     KhachHangDTO khachHangDTO = new KhachHangDTO(maKH, nextNguoiId, false);
-                    pbhModel.insertKhachHang(nguoiDTO, khachHangDTO);
+                    pdvModel.insertKhachHang(khachHangDTO, nguoiDTO);
                 } else {
-                    maKH = pbhModel.getMaKhById(shortId);
+                    maKH = pdvModel.getMaKhByName(shortId);
                 }
 
                 /*
                  * insert P_ThuDTO
                  */
-                int nextIdPhieuThu = pbhModel.getNextIdOfPhieuThu();
+                int nextIdPhieuThu = pdvModel.getNextIdOfPhieuThu();
                 DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 Date dBan = format.parse(ngayBan);
                 Date dThanhToan = format.parse(ngayThanhToan);
@@ -149,41 +114,34 @@ public class LapPhieuDichVuAction extends AbstractAction{
                         maKH,
                         new Timestamp(dBan.getTime()),
                         new Timestamp(dThanhToan.getTime()), tongTien==null ? 0 : tongTien);
-                pbhModel.insertPhieuThu(p_ThuDTO);
+                pdvModel.insertP_Thu(p_ThuDTO);
 
                 /*
                  * insert P_BanHangDTO
                  */
-                int nextIdPhieuBanHang = pbhModel.getNextIdOfPhieuBanHang();
-                P_BanHangDTO p_BanHangDTO = new P_BanHangDTO(
-                        nextIdPhieuBanHang, nextIdPhieuThu);
-                pbhModel.insertPhieuBanHang(p_BanHangDTO);
+                int nextIdPhieuDichVu = pdvModel.getNextIdOfPhieuDichVu();
+                P_DichVuDTO pDichVu = new P_DichVuDTO(
+                        nextIdPhieuDichVu, nextIdPhieuThu);
+                pdvModel.insertP_DichVu(pDichVu);
 
                 /*
                  * insert CTP_BanHangDTO
                  */
-                for (SanPhamDTO sp : listSP) {
+                for (DichVuDTO dv : listDV) {
 
-                    int soLuong = sp.getSoLuong();
-                    int soLuongTon = sp.getSoLuongTon();
-                    int maSP = sp.getMaSP();
-                    int thanhtien = (int) (sp.getSoLuong() * sp.getDonGiaBan());
-                    CTP_BanHangDTO ctp_BanHangDTO = new CTP_BanHangDTO(
-                            pbhModel.getNextIdOfChiTietPhieuBanHang(),
-                            nextIdPhieuBanHang, maSP, soLuong, thanhtien);
-                    pbhModel.insertChiTietPhieuBanHang(ctp_BanHangDTO);
-
-                    /*
-                     * update SoLuongTon của SanPham
-                     */
-                    soLuongTon -= soLuong;
-                    pbhModel.updateSoLuongTonOfSanPham(soLuongTon, maSP);
+                    int soLuong = dv.getSoLuong();
+                    int maDV = dv.getMaDV();
+                    int thanhtien = (int) (dv.getSoLuong() * dv.getDonGia());
+                    CTP_DichVuDTO ctp_DichVuDTO = new CTP_DichVuDTO(
+                            pdvModel.getNextIdOfCTPDV(),
+                            nextIdPhieuDichVu, maDV, soLuong, thanhtien);
+                    pdvModel.insertCTPDichVu(ctp_DichVuDTO);
 
                 }
                 result.put("error", false);
                 result.put("message", "Lưu phiếu hàng thành công!");
             }else{
-                result.put("message", "Chưa chọn danh sách sản phẩm");
+                result.put("message", "Chưa chọn danh sách dịch vụ!");
             }
         
         } catch (Exception e) {
@@ -243,12 +201,12 @@ public class LapPhieuDichVuAction extends AbstractAction{
         this.maKH = maKH;
     }
 
-    public List<SanPhamDTO> getListSP() {
-        return listSP;
+    public List<DichVuDTO> getListDV() {
+        return listDV;
     }
 
-    public void setListSP(List<SanPhamDTO> listSP) {
-        this.listSP = listSP;
+    public void setListDV(List<DichVuDTO> listDV) {
+        this.listDV = listDV;
     }
 
     public String getNgayBan() {

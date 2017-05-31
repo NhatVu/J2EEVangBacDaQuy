@@ -17,6 +17,7 @@ public class DichVuDTO {
     private int maDV;
     private String tenDV;
     private double donGia;
+    private int soLuong;
 
     public DichVuDTO(int maDV, String tenDV, double donGia) {
         this.maDV = maDV;
@@ -58,4 +59,13 @@ public class DichVuDTO {
         this.donGia = donGia;
     }
 
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    
 }

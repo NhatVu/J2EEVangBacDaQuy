@@ -219,22 +219,22 @@
 			<result name="success">/WEB-INF/jsp/admin/LapPhieuDichVu.jsp</result>
 		</action>
 		
-		<action name="getNextCustomerId" class="com.vangbacdaquy.action.LapPhieuDichVuAction"
+		<action name="dvgetNextCustomerId" class="com.vangbacdaquy.action.LapPhieuDichVuAction"
 			method="getNextCustomerId">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	
 		</action>
 		
-		<action name="checkKhachQuen" class="com.vangbacdaquy.action.LapPhieuDichVuAction"
+		<action name="dvcheckKhachQuen" class="com.vangbacdaquy.action.LapPhieuDichVuAction"
 			method="checkKhachQuen">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	
 		</action>
 
-		<action name="luuPhieuBanHang" class="com.vangbacdaquy.action.LapPhieuDichVuAction"
-			method="luuPhieuBanHang">
+		<action name="luuPhieuDichVu" class="com.vangbacdaquy.action.LapPhieuDichVuAction"
+			method="luuPhieuDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	
