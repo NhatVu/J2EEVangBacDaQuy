@@ -21,6 +21,7 @@
 			                    <li><a href="/VangBacDaQuy/admin/quanlybanhang"><i class="fa fa-circle-o"></i>Lập phiếu bán hàng</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/quanlymuahang"><i class="fa fa-circle-o"></i>Lập phiếu mua hàng</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/lapphieudichvu"><i class="fa fa-circle-o"></i>Lập phiếu dịch vụ</a></li>
+			                    <li><a href="/VangBacDaQuy/admin/lapphieuhanggiacong"><i class="fa fa-circle-o"></i>Lập phiếu hàng gia công</a></li>
 <!-- 			                    <li><a href="/VangBacDaQuy/admin/GoCrawlTweet"><i class="fa fa-circle-o"></i>Crawl Twitter</a></li> -->
 <!-- 			                    <li><a href="/VangBacDaQuy/admin/GoPrepareData"><i class="fa fa-circle-o"></i>Prepare Data</a></li> -->
 <!-- 			                    <li><a href="/VangBacDaQuy/admin/GoPreprocessData"><i class="fa fa-circle-o"></i>Preprocess Data</a></li> -->

@@ -190,6 +190,11 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		<action name="getAllThoGiaCong" class="com.vangbacdaquy.action.QuanLyHangGiaCongAction" method="getAllThoGiaCong">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 		
 		<!-- Quan ly ban hang-->
 
@@ -266,6 +271,19 @@
 
 		<action name="luuPhieuDichVu" class="com.vangbacdaquy.action.LapPhieuDichVuAction"
 			method="luuPhieuDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+		
+		<!-- Lap phieu gia cong hang -->
+
+		<action name="lapphieuhanggiacong" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction">
+			<result name="success">/WEB-INF/jsp/admin/LapPhieuHangGiaCong.jsp</result>
+		</action>
+
+		<action name="luuPhieuHangGiaCong" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction"
+			method="luuPhieuHangGiaCong">
 			<result type="json" name="json">
 				<param name="root">result</param>
 			</result>	
