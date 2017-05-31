@@ -15,7 +15,7 @@
 			<section class="content-header">
 					<div class="row text-center">
 						<h4 style="margin-bottom: 25px !important;">
-							Danh sách dịch vụ
+							Danh sách hàng gia công
 						</h4>
 					</div>
 				<hr/>
@@ -33,8 +33,8 @@
 												class="table table-bordered table-striped">
 												<thead>
 													<tr>
-														<th>Mã Dịch Vụ</th>
-														<th>Tên Dịch Vụ</th>
+														<th>Mã Hàng Gia Công</th>
+														<th>Tên Hàng Gia Công</th>
 														<th>Đơn Giá</th>
 														<th>Action <a href="javascript:void(0)" id="btnAddKW"><i
 																	class="fa fa-plus-square"></i> Add</a> </th>
@@ -208,10 +208,10 @@
 				$('#tableSanPham').DataTable( {
 			        fixedHeader: true,
 					destroy: true,
-			        "ajax": "getAllDichVu",
+			        "ajax": "getAllHangGiaCong",
 			        "columns": [
-			            { "data": "maDV" },
-			            { "data": "tenDV" },
+			            { "data": "maLoaiGC" },
+			            { "data": "tenLoaiGC" },
 			            { "data": "donGia" },
 			            { "defaultContent": edit + remove}
 			        ]
@@ -226,8 +226,8 @@
 				var table = $('#tableSanPham').DataTable();
 				var data = table.row( $(keyword).parents('tr') ).data();
 				if (data != null || data !== undefined){
-					$("#txtMaDichVu").val(data.maDV);
-					$("#txtTenDichVu").val(data.tenDV);
+					$("#txtMaDichVu").val(data.maLoaiGC);
+					$("#txtTenDichVu").val(data.tenLoaiGC);
 					$("#txtDonGia").html(data.donGia);
 					$("#txtDonGia").val(data.donGia);
 				}else{
@@ -244,7 +244,7 @@
 					var data = table.row( $(keyword).parents('tr') ).data();
 					console.log(data);
 					$.ajax({
-						url: 'removeDichVu?maDV='+data.maDV,
+						url: 'removeHangGiaCong?maLoaiGC='+data.maLoaiGC,
 						type: 'GET',
 						success: function(data){
 							if(data.error == false){
@@ -263,14 +263,14 @@
 				
 			}
 			
-			function updateKeyword(maDV, tenDV, donGia){
+			function updateKeyword(maLoaiGC, tenLoaiGC, donGia){
 				var object = new Object();
-				object.maDV = maDV;
-				object.tenDV = tenDV;
+				object.maLoaiGC = maLoaiGC;
+				object.tenLoaiGC = tenLoaiGC;
 				object.donGia = donGia;
 				console.log("keyword: " + object);
 				$.ajax({
-				    url: 'updateDichVu',
+				    url: 'updateHangGiaCong',
 				    type: 'POST',
 				    data: object,
 				    success: function(data) {
@@ -293,13 +293,13 @@
 				$.LoadingOverlay("hide");
 			}
 			
-			function addKeyword(tenDV, donGia){
+			function addKeyword(tenLoaiGC, donGia){
 				var object = new Object();
-				object.tenDV = tenDV;
+				object.tenLoaiGC = tenLoaiGC;
 				object.donGia = donGia;
 				console.log("keyword: " + object);
 				$.ajax({
-				    url: 'addDichVu',
+				    url: 'addHangGiaCong',
 				    type: 'POST',
 				    data: object,
 				    success: function(data) {

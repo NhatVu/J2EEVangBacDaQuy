@@ -9,9 +9,9 @@ import com.vangbacdaquy.bo.StatisticsBO;
 import com.vangbacdaquy.constant.DatabaseConstant;
 import com.vangbacdaquy.crawler.Crawler;
 import com.vangbacdaquy.crawler.Page;
-import com.vangbacdaquy.dao.DichVuDAO;
+import com.vangbacdaquy.dao.HangGiaCongDAO;
 import com.vangbacdaquy.dto.DichVuDTO;
-import com.vangbacdaquy.dto.SanPhamDTO;
+import com.vangbacdaquy.dto.HangGiaCongDTO;
 
 public class QuanLyHangGiaCongAction extends AbstractAction{
 	private String logConsole;
@@ -32,9 +32,9 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private DichVuDAO dvDAO= new DichVuDAO();
-	private Integer maDV;
-	private String tenDV;
+	private HangGiaCongDAO hgcDAO= new HangGiaCongDAO();
+	private Integer maLoaiGC;
+	private String tenLoaiGC;
 	private Integer donGia;
 	public String getLogConsole() {
 		return logConsole;
@@ -59,18 +59,18 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
 		return "success";
 	}
 	
-	public String updateDichVu(){
+	public String updateHangGiaCong(){
 	    result.put("error", true);
         result.put("message", "Cập nhật thất bại!");
         try {
-
-            DichVuDTO dv = new DichVuDTO();
-            dv.setMaDV(maDV);
-            dv.setTenDV(tenDV);
-            dv.setDonGia(donGia);
-            System.out.println(dv);
             
-            if(dvDAO.update(dv)){
+            HangGiaCongDTO hgc = new HangGiaCongDTO();
+            hgc.setMaLoaiGC(maLoaiGC);
+            hgc.setTenLoaiGC(tenLoaiGC);
+            hgc.setDonGia(donGia);
+            System.out.println(hgc);
+            
+            if(hgcDAO.update(hgc)){
                 result.put("error", false);
                 result.put("message", "Cập nhật thành công!");
             }
@@ -81,17 +81,16 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
         return "json";
 	}
 	
-	public String removeDichVu(){
+	public String removeHangGiaCong(){
 	    result.put("error", true);
-        result.put("message", "Xoá sản phẩm thất bại!");
+        result.put("message", "Xoá hàng gia công thất bại!");
         try {   
-            if(maDV != null && maDV > 0){
-                DichVuDTO dv = new DichVuDTO();
-                dv.setMaDV(maDV);
-                System.out.println(dv);
-                if(dvDAO.delete(dv)){
+            if(maLoaiGC != null && maLoaiGC > 0){
+                HangGiaCongDTO hgc = new HangGiaCongDTO();
+                hgc.setMaLoaiGC(maLoaiGC);
+                if(hgcDAO.delete(hgc)){
                   result.put("error", false);
-                  result.put("message", "Xóa sản phẩm thành công!");
+                  result.put("message", "Xóa hàng gia công thành công!");
                 }
             }
 
@@ -102,19 +101,18 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
         return "json";
 	}
 	
-	public String addDichVu(){
+	public String addHangGiaCong(){
         result.put("error", true);
         result.put("message", "Thêm mới thất bại!");
         try {
 
-            DichVuDTO dv = new DichVuDTO();
-            maDV = dvDAO.getNexId();
-            dv.setMaDV(maDV);
-            dv.setTenDV(tenDV);
-            dv.setDonGia(donGia);
-            System.out.println(dv);
+            HangGiaCongDTO hgc = new HangGiaCongDTO();
+            maLoaiGC = hgcDAO.getNexId();
+            hgc.setMaLoaiGC(maLoaiGC);
+            hgc.setTenLoaiGC(tenLoaiGC);
+            hgc.setDonGia(donGia);
             
-            if(dvDAO.insert(dv)){
+            if(hgcDAO.insert(hgc)){
                 result.put("error", false);
                 result.put("message", "Thêm mới thành công!");
             }
@@ -125,11 +123,11 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
         return "json";
     }
 	
-	public String getAllDichVu(){
+	public String getAllHangGiaCong(){
 	    result.put("error", true);
-	    List<DichVuDTO> listSanPham = new ArrayList<DichVuDTO>();
+	    List<HangGiaCongDTO> listSanPham = new ArrayList<HangGiaCongDTO>();
 	    try {
-	        listSanPham = dvDAO.getAllDichVu();
+	        listSanPham = hgcDAO.getAllHangGiaCong();
 	        result.put("error", false);
         } catch (Exception e) {
             result.put("error", true);
@@ -253,20 +251,20 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
 		this.url = url;
 	}
 
-    public Integer getMaDV() {
-        return maDV;
+    public Integer getMaLoaiGC() {
+        return maLoaiGC;
     }
 
-    public void setMaDV(Integer maDV) {
-        this.maDV = maDV;
+    public void setMaLoaiGC(Integer maLoaiGC) {
+        this.maLoaiGC = maLoaiGC;
     }
 
-    public String getTenDV() {
-        return tenDV;
+    public String getTenLoaiGC() {
+        return tenLoaiGC;
     }
 
-    public void setTenDV(String tenDV) {
-        this.tenDV = tenDV;
+    public void setTenLoaiGC(String tenLoaiGC) {
+        this.tenLoaiGC = tenLoaiGC;
     }
 
     public Integer getDonGia() {
