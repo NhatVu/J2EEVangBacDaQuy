@@ -239,6 +239,33 @@
 				<param name="root">result</param>
 			</result>	
 		</action>
+		
+		<!-- Lap phieu gia cong hang -->
+
+		<action name="lapphieuhanggiacong" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction">
+			<result name="success">/WEB-INF/jsp/admin/LapPhieuHangGiaCong.jsp</result>
+		</action>
+		
+		<action name="dvgetNextCustomerId" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction"
+			method="getNextCustomerId">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+		
+		<action name="dvcheckKhachQuen" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction"
+			method="checkKhachQuen">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+
+		<action name="luuPhieuDichVu" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction"
+			method="luuPhieuDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
 		<!-- Crawler link -->		
 		<action name="CrawlUrl" class="com.vangbacdaquy.action.QuanLySanPhamAction">
 			<result name="success">/WEB-INF/jsp/admin/CrawlUrl.jsp</result>
