@@ -160,6 +160,37 @@
 			</result>
 		</action>
 		
+		<!-- Quan ly hang gia cong-->
+
+		<action name="quanlyhanggiacong" class="com.vangbacdaquy.action.QuanLyHangGiaCongAction">
+			<result name="success">/WEB-INF/jsp/admin/QuanLyDichVu.jsp</result>
+		</action>
+		
+		<action name="updateDichVu" class="com.vangbacdaquy.action.QuanLyHangGiaCongAction"
+			method="updateDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>	
+		</action>
+		
+		<action name="removeDichVu" class="com.vangbacdaquy.action.QuanLyHangGiaCongAction" method="removeDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="addDichVu" class="com.vangbacdaquy.action.QuanLyHangGiaCongAction" method="addDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+		<action name="getAllDichVu" class="com.vangbacdaquy.action.QuanLyHangGiaCongAction" method="getAllDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
 		<!-- Quan ly ban hang-->
 
 		<action name="quanlybanhang" class="com.vangbacdaquy.action.QuanLyBanHangAction">
