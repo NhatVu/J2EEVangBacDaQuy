@@ -30,7 +30,7 @@
 					<div class="col-md-3"></div>
 				</div>
 				<div class="row">
-					<div class="col-md-1">Ngày bán</div>
+					<div class="col-md-1">Ngày nhận hàng</div>
 					<div class="col-md-3">
 						<div class="form-group pull-left">
 							<div class='input-group date''>
@@ -55,26 +55,19 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-1">Mã KH</div>
-					<div class="col-md-3">  <input id="maKhachHang" type="text" class="form-control"></div>
-					<div class="col-md-2"><button id="kiemtra" type="button" class="btn btn-info btn-block">Kiểm tra KH quen</button></div>
-					<div class="col-md-2">Họ tên</div>
-					<div class="col-md-2"><input id="hoten" type="text" class="form-control"></div>
-				</div>
-				<div class="row" id="message" style="display:none">
-					<div class="col-md-1"></div>
-					<div class="col-md-5"><p style="color:#dd4b39;">Bạn không phải là khách quen</p></div>
-					<div class="col-md-4"></div>
-				</div>
-				<div class="row">
-					<div class="col-md-1"></div>
-					<div class="col-md-5"><button id="layMaKH" type="button" class="btn btn-primary btn-block">Lấy mã khách hàng tiếp theo</button></div>
-					<div class="col-md-2"></div>
-					<div class="col-md-2"></div>
+					<div class="col-md-1">Họ tên</div>
+						<div class="col-md-3">
+							<select class="danhsachtho form-control">
+								<option value="-1">-Chọn thợ gia công-</option>
+							</select>
+						</div>
+						<div class="col-md-2"></div>
+					<div class="col-md-2">Mã thợ</div>
+					<div class="col-md-2"><input disabled="disabled" id="maKhachHang" type="text" class="form-control"></div>
 				</div>
 				<div class="row">
 					<div class="col-md-1">Địa chỉ</div>
-					<div class="col-md-9"><input id="diaChi" type="text" class="form-control"></div>
+					<div class="col-md-9"><input disabled="disabled" id="diaChi" type="text" class="form-control"></div>
 				</div>
 			</div>
 
@@ -175,8 +168,10 @@
 			onSelect: $.noop
 		});
 		var danhSachSanPham = null;
+		var danhSachTho = null;
 		var tempRow = "";
 		getListSanPham();
+		getListTho();
 		bindingEventSelect();
 		bindingEventInput();
 		$('#luuPhieu').prop('disabled', false);
@@ -224,7 +219,7 @@
 		function getListSanPham(){
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'getAllSanPham',
+			    url: 'getAllHangGiaCong',
 			    type: 'POST',
 			    success: function(data) {
 			    		var list = data.data;
@@ -232,7 +227,7 @@
 			    		var content = "";
 			    		content += "<option  value='-1'>-Chọn sản phẩm-</option>";
 			    		for(var i = 0; i < list.length; i++){
-			    			content += "<option  value='"+list[i].maSP+"'>"+ list[i].tenSP +"</option>";
+			    			content += "<option  value='"+list[i].maLoaiGC+"'>"+ list[i].tenLoaiGC +"</option>";
 			    		}
 			    		$(".selectSanPham").html(content);
 // 			    		$('.selectSanPham').selectpicker('refresh');
@@ -245,6 +240,43 @@
 			  });
 			$.LoadingOverlay("hide");
 		}
+		
+		function getListTho(){
+			$.LoadingOverlay("show");
+			$.ajax({
+			    url: 'getAllThoGiaCong',
+			    type: 'POST',
+			    success: function(data) {
+			    		var list = data.data;
+			    		$(".danhsachtho").html("");
+			    		var content = "";
+			    		content += "<option  value='-1'>-Chọn thợ gia công-</option>";
+			    		for(var i = 0; i < list.length; i++){
+			    			content += "<option  value='"+list[i].maTho+"'>"+ list[i].tenTho +"</option>";
+			    		}
+			    		danhSachTho = list;
+			    		$(".danhsachtho").html(content);
+			    },
+			    error: function(xhr, ajaxOptions, thrownError){
+			    	console.log(thrownError);
+			    }
+			  });
+			$.LoadingOverlay("hide");
+		}
+		
+		$('.danhsachtho').on('change', function (e) {
+			 var id = e.target.value;
+			$("#maKhachHang").val(id);
+			for(var i = 0; i< danhSachTho.length; i++){
+				if(id == danhSachTho[i].maTho){
+					$("#maKhachHang").html(id);
+					$("#diaChi").html(danhSachTho[i].diaChi);
+					$("#diaChi").val(danhSachTho[i].diaChi);
+					break;
+				}
+			}
+		
+			});
 
 		$("#themSanPham").click(function(){
 			themDongMoi();
@@ -256,9 +288,9 @@
 			luuPhieuBanHang();
 		});
 		
-		function getProduct(maSP){
+		function getProduct(maLoaiGC){
 			for(var i = 0; i < danhSachSanPham.length; i++){
-				if(danhSachSanPham[i].maSP == maSP) return danhSachSanPham[i];
+				if(danhSachSanPham[i].maLoaiGC == maLoaiGC) return danhSachSanPham[i];
 			}
 			return null;
 		}
@@ -318,7 +350,7 @@
 				 console.log("San pham: " + sp);
 				 console.log(this);
 				 var donGiaBan = getTdTable(e, 3);
-				 donGiaBan.html(sp == null ? "" : sp.donGiaBan);
+				 donGiaBan.html(sp == null ? "" : sp.donGia);
 				});
 		}
 		
@@ -337,12 +369,12 @@
 			for(var i =  0; i < list.length; i++){
 				var object = list[i];
 				var SanPhamDTO = new Object();
-				var maSP = $($(object).children("td")[0]).children("select")[0].value;
-				if(maSP != -1){
-				console.log("maSP: " + maSP);
+				var maLoaiGC = $($(object).children("td")[0]).children("select")[0].value;
+				if(maLoaiGC != -1){
+				console.log("maSP: " + maLoaiGC);
 				var soLuong = $($(object).children("td")[1]).children("input")[0].value;
 				console.log("soLuong: " + soLuong);
-				SanPhamDTO.maSP = maSP;
+				SanPhamDTO.maLoaiGC = maLoaiGC;
 				SanPhamDTO.soLuong = soLuong;
 				listSP.push(SanPhamDTO);
 				}
@@ -362,12 +394,10 @@
 			o.ngayBan = $("#ngayBan").val();
 			o.ngayThanhToan = $("#ngayThanhToan").val();
 			o.maKhachHang = $("#maKhachHang").val();
-			o.hoTen = $("#hoten").val();
-			o.diaChi = $("#diaChi").val();
 			o.tongTien = $("#tongtien").val();
 			$.LoadingOverlay("show");
 			$.ajax({
-			    url: 'luuPhieuBanHang?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&hoTen='+o.hoTen+'&diaChi='+o.diaChi+'&tongTien='+o.tongTien,
+			    url: 'luuPhieuHangGiaCong?maPhieu='+o.maPhieu+'&ngayBan='+o.ngayBan+'&maKH='+o.maKhachHang+'&ngayThanhToan='+o.ngayThanhToan+'&tongTien='+o.tongTien,
 			    type: 'POST',
 			    async: false,
 			    data: listSP,

@@ -17,6 +17,7 @@ public class HangGiaCongDTO {
     private int maLoaiGC;
     private String tenLoaiGC;
     private double donGia;
+    private int soLuong;
 
     public HangGiaCongDTO(int maLoaiGC, String tenLoaiGC, double donGia) {
         this.maLoaiGC = maLoaiGC;
@@ -58,4 +59,12 @@ public class HangGiaCongDTO {
         this.donGia = donGia;
     }
 
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+    
 }

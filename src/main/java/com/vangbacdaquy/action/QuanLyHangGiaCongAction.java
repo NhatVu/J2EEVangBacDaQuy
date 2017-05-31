@@ -10,8 +10,10 @@ import com.vangbacdaquy.constant.DatabaseConstant;
 import com.vangbacdaquy.crawler.Crawler;
 import com.vangbacdaquy.crawler.Page;
 import com.vangbacdaquy.dao.HangGiaCongDAO;
+import com.vangbacdaquy.dao.ThoGiaCongDAO;
 import com.vangbacdaquy.dto.DichVuDTO;
 import com.vangbacdaquy.dto.HangGiaCongDTO;
+import com.vangbacdaquy.dto.ThoGiaCongDTO;
 
 public class QuanLyHangGiaCongAction extends AbstractAction{
 	private String logConsole;
@@ -33,6 +35,7 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
 	private static final long serialVersionUID = 1L;
 	
 	private HangGiaCongDAO hgcDAO= new HangGiaCongDAO();
+	private ThoGiaCongDAO tgcDAO = new ThoGiaCongDAO();
 	private Integer maLoaiGC;
 	private String tenLoaiGC;
 	private Integer donGia;
@@ -135,6 +138,19 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
 	    result.put("data", listSanPham);
 		return "json";
 	}
+	
+	public String getAllThoGiaCong(){
+        result.put("error", true);
+        List<ThoGiaCongDTO> list = new ArrayList<ThoGiaCongDTO>();
+        try {
+            list = tgcDAO.getAllThoGiaCong();
+            result.put("error", false);
+        } catch (Exception e) {
+            result.put("error", true);
+        }
+        result.put("data", list);
+        return "json";
+    }
 	
 	public String countDocumentsByCurrentDay(){
 		int count = 0;
