@@ -19,7 +19,7 @@ import com.vangbacdaquy.models.PhieuBanHangModel;
 import com.vangbacdaquy.utility.ValidateUtil;
 
 
-public class LapPheuHangGiaCongAction extends AbstractAction{
+public class LapPhieuHangGiaCongAction extends AbstractAction{
 	private static final long serialVersionUID = 1L;
 	private Long tongTien;
 	private Integer maPhieu;

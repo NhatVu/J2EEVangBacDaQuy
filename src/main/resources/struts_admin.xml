@@ -260,7 +260,7 @@
 			</result>	
 		</action>
 
-		<action name="luuPhieuDichVu" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction"
+		<action name="luuPhieuHangGiaCong" class="com.vangbacdaquy.action.LapPhieuHangGiaCongAction"
 			method="luuPhieuDichVu">
 			<result type="json" name="json">
 				<param name="root">result</param>
