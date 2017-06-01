@@ -14,6 +14,7 @@ import com.vangbacdaquy.dto.KhachHangDTO;
 import com.vangbacdaquy.dto.NguoiDTO;
 import com.vangbacdaquy.dto.P_DichVuDTO;
 import com.vangbacdaquy.dto.P_ThuDTO;
+import com.vangbacdaquy.dto.SanPhamDTO;
 import com.vangbacdaquy.models.PhieuDichVuModel;
 import com.vangbacdaquy.utility.ValidateUtil;
 
@@ -85,7 +86,15 @@ public class LapPhieuDichVuAction extends AbstractAction{
                 return "json";
             }
             if (listDV != null && listDV.size() > 0) {
-
+            	 for (DichVuDTO dv : listDV) {
+                     Integer maSP = dv.getMaDV();
+                     for (DichVuDTO sanPhamDTO : pdvModel.getAllDichVu()) {
+                         if (maSP==sanPhamDTO.getMaDV()) {
+                        	 dv.setDonGia(sanPhamDTO.getDonGia());
+                             break;
+                         }
+                     }
+            	 }
                 /*
                  * insert NguoiiDTO, KhachHangDTO
                  */

@@ -3,8 +3,6 @@ package com.vangbacdaquy.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.Document;
-
 import com.vangbacdaquy.constant.DatabaseConstant;
 import com.vangbacdaquy.dao.SanPhamDAO;
 import com.vangbacdaquy.dto.SanPhamDTO;
@@ -21,9 +19,7 @@ public class QuanLySanPhamAction extends AbstractAction{
 	
 	// crawl Link
 	private String url = "";
-		
-	private List<Document> listDocument = new ArrayList<Document>();
-	
+			
 	private static final long serialVersionUID = 1L;
 	
 	private SanPhamDAO spDAO= new SanPhamDAO();
@@ -168,13 +164,6 @@ public class QuanLySanPhamAction extends AbstractAction{
 		this.streaming = streaming;
 	}
 
-	public List<Document> getListDocument() {
-		return listDocument;
-	}
-
-	public void setListDocument(List<Document> listDocument) {
-		this.listDocument = listDocument;
-	}
 
 	public String getStatusStreaming() {
 		return statusStreaming;

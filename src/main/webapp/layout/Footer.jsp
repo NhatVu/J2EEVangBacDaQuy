@@ -84,5 +84,5 @@
 		}
 	</style>
 <footer class="main-footer" style="text-align: right;">
-    <strong>© 2016 Admicro.vn - AdTech HCM</strong>
+    <strong>ï¿½ 2017 SE08-UIT</strong>
 </footer>

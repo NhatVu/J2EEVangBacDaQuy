@@ -249,5 +249,39 @@
 				<param name="root">result</param>
 			</result>
 		</action>
+		
+			<!-- Lich su ban hang -->
+
+		<action name="lichsubanhang" class="com.vangbacdaquy.action.LichSuBanHangAction">
+			<result name="success">/WEB-INF/jsp/admin/LichSuBanHang.jsp</result>
+		</action>
+		
+		<action name="getAllPhieuBanHang" class="com.vangbacdaquy.action.LichSuBanHangAction" method="getAllPhieuBanHang">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getCTPMuaHangByMaPBH" class="com.vangbacdaquy.action.LichSuBanHangAction" method="getCTPMuaHangByMaPBH">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		
+				<!-- Lich su dich vu -->
+
+		<action name="lichsudichvu" class="com.vangbacdaquy.action.LichSuDichVuAction">
+			<result name="success">/WEB-INF/jsp/admin/LichSuDichVu.jsp</result>
+		</action>
+		
+		<action name="getAllPhieuDichVu" class="com.vangbacdaquy.action.LichSuDichVuAction" method="getAllPhieuDichVu">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="getCTPMuaHangByMaPDV" class="com.vangbacdaquy.action.LichSuDichVuAction" method="getCTPMuaHangByMaPDV">
+			<result type="json" name="json">
+				<param name="root">result</param>
+			</result>
+		</action>
 	</package>
 </struts>

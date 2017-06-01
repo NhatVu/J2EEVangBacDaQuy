@@ -15,7 +15,7 @@
 			<section class="content-header">
 				<div class="row text-center">
 					<h4 style="margin-bottom: 25px !important;">Danh sách phiếu
-						mua hàng</h4>
+	bán hàng</h4>
 				</div>
 				<hr />
 			</section>
@@ -32,10 +32,10 @@
 										class="table table-bordered table-striped">
 										<thead>
 											<tr>
-												<th>Mã Phiếu mua hàng</th>
+												<th>Mã Phiếu bán hàng</th>
 												<th>Mã khách hàng</th>
-												<th>Ngày mua</th>
-												<th>Ngày thanh toán</th>
+												<th>Ngày lập phiếu</th>
+												<th>Ngày kết thúc</th>
 												<th>Tổng tiền</th>
 												<th>Action </th>
 											</tr>
@@ -95,7 +95,7 @@ input.form-control.input-sm {
 							class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th>Mã CT Phiếu mua hàng</th>
+									<th>Mã CT Phiếu bán hàng</th>
 									<th>Mã Sản phẩm</th>
 									<th>Số lượng</th>
 									<th>Thành tiền</th>
@@ -124,15 +124,15 @@ input.form-control.input-sm {
 			$('#tableSanPham').DataTable({
 				fixedHeader : true,
 				destroy : true,
-				"ajax" : "getAllPhieuMuaHang",
+				"ajax" : "getAllPhieuBanHang",
 				"columns" : [ {
-					"data" : "maP_MH"
+					"data" : "maP_BH"
 				}, {
 					"data" : "maKH"
 				}, {
-					"data" : "ngayMua"
+					"data" : "ngayLapPhieu"
 				}, {
-					"data" : "ngayThanhToan"
+					"data" : "ngayKetThuc"
 				}, {
 					"data" : "tongCong"
 				}, {
@@ -148,7 +148,7 @@ input.form-control.input-sm {
 			var data = table.row($(keyword).parents('tr')).data();
 			console.log(data);
 			$.ajax({
-				url : 'getCTPMuaHangByMaPMH?maPMH=' + data.maP_MH,
+				url : 'getCTPMuaHangByMaPBH?maPBH=' + data.maP_BH,
 				type : 'GET',
 				success : function(data) {
 					if (data.error == true) {
@@ -159,7 +159,7 @@ input.form-control.input-sm {
 						destroy : true,
 						data : data.data,
 						"columns" : [ {
-							"data" : "maCTP_MH"
+							"data" : "maCTP_BH"
 						}, {
 							"data" : "maSP"
 						}, {

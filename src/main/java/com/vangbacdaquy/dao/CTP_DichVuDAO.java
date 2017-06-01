@@ -1,12 +1,17 @@
 package com.vangbacdaquy.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.vangbacdaquy.dto.CTP_DichVuDTO;
+import com.vangbacdaquy.dto.CTP_DichVuDTO;
 
 public class CTP_DichVuDAO extends SuperDAO {
+	private String TAG = CTP_DichVuDAO.class.getSimpleName();
 
 	/*
 	 * CRUD
@@ -127,6 +132,44 @@ public class CTP_DichVuDAO extends SuperDAO {
 			}
 		}
 		return 0;
+	}
+	
+	public ArrayList<CTP_DichVuDTO> getCTPDichVuByMaPBH(int maPDV) {
+		try {
+			this.getConnection();
+			ArrayList<CTP_DichVuDTO> result = new ArrayList<CTP_DichVuDTO>();
+			String query = "SELECT * FROM CTP_DICHVU where MAP_DV=" + maPDV;
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				int maCTP_BH = resultSet.getInt("MACTP_DV");
+				int maP_DV = resultSet.getInt("MAP_DV");
+				int maSP = resultSet.getInt("MADV");
+				int soLuong = resultSet.getInt("SOLUONG");
+				int thanhTien = resultSet.getInt("THANHTIEN");
+			
+			
+				CTP_DichVuDTO ctp_DichVuDTO = new CTP_DichVuDTO( maCTP_BH,  maP_DV, maSP,  soLuong,  thanhTien);
+
+				result.add(ctp_DichVuDTO);
+
+			}
+			statement.close();
+			return result;
+		} catch (SQLException ex) {
+			Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException ex) {
+					// TODO: handle exception
+					Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+				}
+			}
+		}
+
+		return null;
 	}
 
 	public int getNexId() {

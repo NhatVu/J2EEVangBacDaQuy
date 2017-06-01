@@ -5,17 +5,22 @@
  */
 package com.vangbacdaquy.dao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.vangbacdaquy.dto.CTP_BanHangDTO;
+import com.vangbacdaquy.dto.CTP_MuaHangDTO;
 
 /**
  *
  * @author Minh Nhat
  */
 public class CTP_BanHangDAO extends SuperDAO {
+	private String TAG = CTP_BanHangDAO.class.getSimpleName();
 
 	/*
 	 * CRUD
@@ -139,6 +144,44 @@ public class CTP_BanHangDAO extends SuperDAO {
 	public int getNexId() {
 		return getLastID() + 1;
 
+	}
+	
+	public ArrayList<CTP_BanHangDTO> getCTPBanHangByMaPBH(int maPBH) {
+		try {
+			this.getConnection();
+			ArrayList<CTP_BanHangDTO> result = new ArrayList<CTP_BanHangDTO>();
+			String query = "SELECT * FROM CTP_BANHANG where MAP_BH=" + maPBH;
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				int maCTP_BH = resultSet.getInt("MACTP_BH");
+				int maP_BH = resultSet.getInt("MAP_BH");
+				int maSP = resultSet.getInt("MASP");
+				int soLuong = resultSet.getInt("SOLUONG");
+				int thanhTien = resultSet.getInt("THANHTIEN");
+			
+			
+				CTP_BanHangDTO ctp_BanHangDTO = new CTP_BanHangDTO( maCTP_BH,  maP_BH, maSP,  soLuong,  thanhTien);
+
+				result.add(ctp_BanHangDTO);
+
+			}
+			statement.close();
+			return result;
+		} catch (SQLException ex) {
+			Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException ex) {
+					// TODO: handle exception
+					Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+				}
+			}
+		}
+
+		return null;
 	}
 	
 	public static void main(String[] args) {

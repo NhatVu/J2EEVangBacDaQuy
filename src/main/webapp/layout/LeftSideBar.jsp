@@ -23,6 +23,8 @@
 			                    <li><a href="/VangBacDaQuy/admin/lapphieudichvu"><i class="fa fa-circle-o"></i>Lập phiếu dịch vụ</a></li>
 			                    <li><a href="/VangBacDaQuy/admin/lapphieuhanggiacong"><i class="fa fa-circle-o"></i>Lập phiếu hàng gia công</a></li>
   			                    <li><a href="/VangBacDaQuy/admin/lichsumuahang"><i class="fa fa-circle-o"></i>Lịch sử mua hàng</a></li>
+  			                    <li><a href="/VangBacDaQuy/admin/lichsubanhang"><i class="fa fa-circle-o"></i>Lịch sử bán hàng</a></li>
+  			                    <li><a href="/VangBacDaQuy/admin/lichsudichvu"><i class="fa fa-circle-o"></i>Lịch sử dịch vụ</a></li>
 
 			                </ul>
 			            </li>

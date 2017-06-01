@@ -3,7 +3,6 @@ package com.vangbacdaquy.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.Document;
 
 import com.vangbacdaquy.constant.DatabaseConstant;
 import com.vangbacdaquy.dao.HangGiaCongDAO;
@@ -25,7 +24,6 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
 	// crawl Link
 	private String url = "";
 		
-	private List<Document> listDocument = new ArrayList<Document>();
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -176,14 +174,6 @@ public class QuanLyHangGiaCongAction extends AbstractAction{
 
 	public void setStreaming(Integer streaming) {
 		this.streaming = streaming;
-	}
-
-	public List<Document> getListDocument() {
-		return listDocument;
-	}
-
-	public void setListDocument(List<Document> listDocument) {
-		this.listDocument = listDocument;
 	}
 
 	public String getStatusStreaming() {

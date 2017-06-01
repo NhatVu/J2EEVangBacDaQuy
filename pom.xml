@@ -7,12 +7,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Vàng Bạc Đá Quý</name>
 	<url>http://maven.apache.org</url>
-	<repositories>
-		<repository>
-			<id>ml-group</id>
-			<url>http://192.168.23.191:8081/nexus/content/repositories/ml-group/</url>
-		</repository>
-	</repositories>
+
 	<properties>
 		<lucene.version>3.6.2</lucene.version>
 		<nd4j.version>0.4-rc3.8</nd4j.version>
@@ -55,25 +50,8 @@
 			<artifactId>struts2-rest-plugin</artifactId>
 			<version>2.3.20</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongo-java-driver</artifactId>
-			<version>3.4.1</version>
-		</dependency>
+	
 
-		<dependency>
-			<groupId>org.twitter4j</groupId>
-			<artifactId>twitter4j-core</artifactId>
-			<version>4.0.5</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.twitter4j/twitter4j-stream -->
-		<dependency>
-			<groupId>org.twitter4j</groupId>
-			<artifactId>twitter4j-stream</artifactId>
-			<version>4.0.5</version>
-		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -85,36 +63,7 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.5</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>${lucene.version}</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-misc -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-misc</artifactId>
-			<version>${lucene.version}</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.15</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>3.15</version>
-		</dependency>
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka</groupId>
-			<artifactId>weka-stable</artifactId>
-			<version>3.8.1</version>
-		</dependency>
+	
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -127,56 +76,7 @@
 			<artifactId>struts2-json-plugin</artifactId>
 			<version>2.3.7</version>
 		</dependency>
-		<dependency>
-			<groupId>net.lingala.zip4j</groupId>
-			<artifactId>zip4j</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.10.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>
-			<version>1.3</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.vccorp.corenlp</groupId>
-			<artifactId>vctokenizer</artifactId>
-			<version>1.5.6</version>
-		</dependency>
-
-		<!-- <dependency> -->
-		<!-- <groupId>com.clearnlp</groupId> -->
-		<!-- <artifactId>clearnlp</artifactId> -->
-		<!-- <version>3.2.1</version> -->
-		<!-- </dependency> -->
-
-		<dependency>
-			<groupId>com.jmdn</groupId>
-			<artifactId>jmdn</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.xz</groupId>
-			<artifactId>xz</artifactId>
-			<version>1.5</version>
-		</dependency>
-		<dependency>
-			<groupId>args4j</groupId>
-			<artifactId>args4j</artifactId>
-			<version>2.32</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.brown</groupId>
-			<artifactId>brown</artifactId>
-			<version>0.4</version>
-		</dependency>
+	
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -184,77 +84,11 @@
 			<version>2.7</version>
 		</dependency>
 
-		<dependency>
-			<groupId>com.hppc</groupId>
-			<artifactId>hppc</artifactId>
-			<version>0.6.1</version>
-		</dependency>
 
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.POSTag</groupId>
-			<artifactId>POSTag</artifactId>
-			<version>1.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.github.vinhkhuc</groupId>
-			<artifactId>jcrfsuite</artifactId>
-			<version>0.6</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.apache.thrift</groupId>
-			<artifactId>libthrift</artifactId>
-			<version>0.9.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>edu.emory.mathcs.nlp</groupId>
-			<artifactId>nlp4j-core</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.deeplearning4j</groupId>
-			<artifactId>deeplearning4j-core</artifactId>
-			<version>${dl4j.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.deeplearning4j</groupId>
-			<artifactId>deeplearning4j-nlp</artifactId>
-			<version>${dl4j.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nd4j</groupId>
-			<artifactId>nd4j-x86</artifactId>
-			<version>${nd4j.version}</version>
-		</dependency>
-
-		<dependency>
-			<artifactId>canova-api</artifactId>
-			<groupId>org.nd4j</groupId>
-			<version>${canova.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>de.julielab</groupId>
-			<artifactId>aliasi-lingpipe</artifactId>
-			<version>4.1.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.clearnlp</groupId>
-			<artifactId>clearnlp</artifactId>
-			<version>3.2.1</version>
-			<!-- <scope>system</scope> -->
-			<!-- <systemPath>${basedir}/lib/clearnlp-3.2.1.jar</systemPath> -->
 		</dependency>
 
 		<dependency>
@@ -271,7 +105,7 @@
 
 	<!-- Build su dung tomcat server -->
 	<build>
-		<finalName>eds</finalName>
+		<finalName>VangBacDaQuy</finalName>
 		<plugins>
 
 			<!-- Config: Maven Tomcat Plugin -->

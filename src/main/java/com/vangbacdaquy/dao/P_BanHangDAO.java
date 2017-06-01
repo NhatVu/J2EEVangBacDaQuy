@@ -7,18 +7,23 @@ package com.vangbacdaquy.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.vangbacdaquy.dto.P_BanHangDTO;
+import com.vangbacdaquy.dto.P_MuaHangDTO;
+import com.vangbacdaquy.dto.P_ThuDTO;
 
 /**
  *
  * @author Minh Nhat
  */
 public class P_BanHangDAO extends SuperDAO {
+	private String TAG = P_BanHangDAO.class.getSimpleName();
 
 	private final String maP_BH = "MAP_BH";
 	private final String maP_Thu = "MAP_THU";
@@ -293,4 +298,47 @@ public class P_BanHangDAO extends SuperDAO {
 		return getLastID() + 1;
 
 	}
+	
+	public ArrayList<P_ThuDTO> getAllP_BanHang() {
+		try {
+			this.getConnection();
+			ArrayList<P_ThuDTO> result = new ArrayList<P_ThuDTO>();
+			String query = "SELECT * FROM P_BANHANG AS b inner join P_THU as t on t.MAP_THU = b.MAP_THU";
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
+				int maP_BH = resultSet.getInt("MAP_BH");
+				int maKH = resultSet.getInt("MAKH");
+				Timestamp ngayLapPhieu = resultSet.getTimestamp("NGAYLAPPHIEU");
+				Timestamp ngayKetThuc = resultSet.getTimestamp("NGAYKETTHUC");
+				int tongCong = resultSet.getInt("TONGCONG");
+			
+				P_ThuDTO p_BanHangDTO = new P_ThuDTO();
+				p_BanHangDTO.setMaP_BH(maP_BH);
+				p_BanHangDTO.setMaKH(maKH);
+				p_BanHangDTO.setNgayLapPhieu(ngayLapPhieu);
+				p_BanHangDTO.setNgayKetThuc(ngayKetThuc);
+				p_BanHangDTO.setTongCong(tongCong);
+
+				result.add(p_BanHangDTO);
+
+			}
+			statement.close();
+			return result;
+		} catch (SQLException ex) {
+			Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException ex) {
+					// TODO: handle exception
+					Logger.getLogger(TAG).log(Level.SEVERE, null, ex);
+				}
+			}
+		}
+
+		return null;
+	}
+
 }

@@ -21,6 +21,8 @@ public class P_ThuDTO {
     private Timestamp ngayLapPhieu;
     private Timestamp ngayKetThuc;
     private double tongCong;
+    private int maP_BH;
+    private int maP_DV;
 
     public P_ThuDTO(int maP_Thu, int maKH, Timestamp ngayLapPhieu, Timestamp ngayKetThuc, double tongCong) {
         this.maP_Thu = maP_Thu;
@@ -79,5 +81,23 @@ public class P_ThuDTO {
     public void setTongCong(double tongCong) {
         this.tongCong = tongCong;
     }
+
+	public int getMaP_BH() {
+		return maP_BH;
+	}
+
+	public void setMaP_BH(int maP_BH) {
+		this.maP_BH = maP_BH;
+	}
+
+	public int getMaP_DV() {
+		return maP_DV;
+	}
+
+	public void setMaP_DV(int maP_DV) {
+		this.maP_DV = maP_DV;
+	}
+    
+    
 
 }
