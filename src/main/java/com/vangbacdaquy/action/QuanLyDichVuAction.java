@@ -5,10 +5,7 @@ import java.util.List;
 
 import org.bson.Document;
 
-import com.vangbacdaquy.bo.StatisticsBO;
 import com.vangbacdaquy.constant.DatabaseConstant;
-import com.vangbacdaquy.crawler.Crawler;
-import com.vangbacdaquy.crawler.Page;
 import com.vangbacdaquy.dao.DichVuDAO;
 import com.vangbacdaquy.dto.DichVuDTO;
 import com.vangbacdaquy.dto.SanPhamDTO;
@@ -25,9 +22,7 @@ public class QuanLyDichVuAction extends AbstractAction{
 	
 	// crawl Link
 	private String url = "";
-	
-	private StatisticsBO statisticsBO;
-	
+		
 	private List<Document> listDocument = new ArrayList<Document>();
 	
 	private static final long serialVersionUID = 1L;
@@ -51,7 +46,6 @@ public class QuanLyDichVuAction extends AbstractAction{
 	@Override
 	public void prepare() throws Exception {
 		super.prepare();
-		statisticsBO = new StatisticsBO();
 	}
 	
 	@Override
@@ -138,57 +132,6 @@ public class QuanLyDichVuAction extends AbstractAction{
 		return "json";
 	}
 	
-	public String countDocumentsByCurrentDay(){
-		int count = 0;
-		result.put("error", true);
-		try {
-			result.put("error", false);
-			count = statisticsBO.countDocumentsByCurrentDay(DatabaseConstant.MongoDBStreamingCollection);
-		} catch (Exception e) {
-			result.put("error", true);
-			result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
-			System.out.println(e.getMessage());
-		}
-		result.put("data", count);
-		return "json";
-	}
-	
-	public String countDocumentsGroupByYearMonthDay(){
-		result.put("error", true);
-		return "json";
-	}
-	
-	public String streamingTwitter(){	
-		result.put("error", true);
-		return "json";
-	}
-	
-	public String crawlLink(){
-		result.put("error", true);
-		try {
-			if(url != null && !"".equals(url)){
-				Crawler crawler = new Crawler();
-				Page page = crawler.crawlUrl(url);
-				System.out.println("title: " + page.getTitle());
-				List<Page> list = new ArrayList<Page>();
-				list.add(page);
-				result.put("error", false);
-				result.put("data",list);
-			}else{
-				result.put("data", new Page());
-			}
-		} catch (Exception e) {
-			result.put("error", true);
-			result.put("message", "Có lỗi vui lòng kiểm tra lại thao tác!");
-			System.out.println(e.getMessage());
-		}
-		return "json";
-	}
-	
-	public String goCrawlTweet() throws Exception {
-		return "admin";
-	}
-
 	public Integer getId() {
 		return id;
 	}

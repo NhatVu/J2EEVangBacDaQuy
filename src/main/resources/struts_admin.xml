@@ -41,63 +41,6 @@
 			</result>
 		</global-results>
 
-		<action name="uploadFile" class="com.vangbacdaquy.action.UploadFileAction">
-			<!-- <interceptor-ref name="fileUpload"> -->
-			<!-- <param name="allowedTypes">image/jpeg,image/gif,text/plain</param> -->
-			<!-- </interceptor-ref> -->
-			<result name="CrawlTweet">/WEB-INF/jsp/admin/CrawlTweet.jsp</result>
-			<result name="PreprocessData">/WEB-INF/jsp/admin/PreprocessData.jsp</result>
-			<result name="TrainModel">/WEB-INF/jsp/admin/TrainModel.jsp</result>
-			<result name="PredictHotNews">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
-			<result name="StreamingClassification">/WEB-INF/jsp/admin/StreamingClassification.jsp</result>			
-			<result name="error">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
-		</action>
-		<action name="downloadFile" class="com.vangbacdaquy.action.DownloadFileAction">
-			<result name="success" type="stream">
-				<param name="contentType">application/octet-stream</param>
-				<param name="inputName">fileInputStream</param>
-				<param name="contentDisposition">attachment;filename=${fileName}</param>
-				<param name="bufferSize">1024</param>
-			</result>
-		</action>
-
-		<action name="GoPrepareData" class="com.vangbacdaquy.action.PrepareDataAction"
-			method="goPrepareData">
-			<result name="admin">/WEB-INF/jsp/admin/PrepareData.jsp</result>
-		</action>
-		<action name="PrepareData" class="com.vangbacdaquy.action.PrepareDataAction"
-			method="execute">
-			<result name="admin">/WEB-INF/jsp/admin/PrepareData.jsp</result>
-		</action>
-
-		<action name="GoTrainModel" class="com.vangbacdaquy.action.TrainModelAction"
-			method="goTrainModel">
-			<result name="admin">/WEB-INF/jsp/admin/TrainModel.jsp</result>
-		</action>
-		<action name="TrainModel" class="com.vangbacdaquy.action.TrainModelAction"
-			method="execute">
-			<result name="admin">/WEB-INF/jsp/admin/TrainModel.jsp</result>
-		</action>
-
-		<action name="GoPredictHotNews" class="com.vangbacdaquy.action.PredictHotNewsAction"
-			method="goPredictHotNews">
-			<result name="admin">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
-		</action>
-		<action name="PredictHotNews" class="com.vangbacdaquy.action.PredictHotNewsAction"
-			method="execute">
-			<result name="admin">/WEB-INF/jsp/admin/PredictHotNews.jsp</result>
-		</action>
-
-		<!-- Twitter -->
-		<action name="GoCrawlTweet" class="com.vangbacdaquy.action.CrawlTweetAction"
-			method="goCrawlTweet">
-			<result name="admin">/WEB-INF/jsp/admin/CrawlTweet.jsp</result>
-		</action>
-		<action name="CrawlTweet" class="com.vangbacdaquy.action.CrawlTweetAction"
-			method="execute">
-			<result name="admin">/WEB-INF/jsp/admin/CrawlTweet.jsp</result>
-		</action>
-
 		<!-- Quan ly san pham -->
 
 		<action name="quanlysanpham" class="com.vangbacdaquy.action.QuanLySanPhamAction">
@@ -288,22 +231,8 @@
 				<param name="root">result</param>
 			</result>	
 		</action>
-		<!-- Crawler link -->		
-		<action name="CrawlUrl" class="com.vangbacdaquy.action.QuanLySanPhamAction">
-			<result name="success">/WEB-INF/jsp/admin/CrawlUrl.jsp</result>
-		</action>
-		
-		<action name="crawlLink" class="com.vangbacdaquy.action.QuanLySanPhamAction" method="crawlLink">
-			<result type="json" name="json">
-				<param name="root">result</param>
-			</result>
-		</action>
-		
-		<!-- Tracking tweets -->
-		<action name="TrackingTweet" class="com.vangbacdaquy.action.TrackingTweetAction">
-			<result name="success">/WEB-INF/jsp/admin/TrackingTweet.jsp</result>
-		</action>
-		
+			
+				
 			<!-- Lich su mua hang -->
 
 		<action name="lichsumuahang" class="com.vangbacdaquy.action.LichSuMuaHangAction">

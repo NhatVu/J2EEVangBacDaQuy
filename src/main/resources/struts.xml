@@ -31,17 +31,17 @@
 		
 		<action name="Login" class="com.vangbacdaquy.action.LoginAction"
 			method="execute">
-			<result name="admin">/WEB-INF/jsp/editor/ShowHotNews.jsp</result>
-			<result name="editor">/WEB-INF/jsp/editor/ShowHotNews.jsp</result>
+			<result name="admin">/WEB-INF/jsp/Intro.jsp</result>
+			<result name="editor">/WEB-INF/jsp/Intro.jsp</result>
 			<result name="fail">/WEB-INF/jsp/Login.jsp</result>
 		</action>
 		<action name="executeLogin" class="com.vangbacdaquy.action.LoginAction"
 			method="login">
 			<result name="admin" type="redirect">
-				<param name="location">/editor/ShowHotNews</param>
+				<param name="location">/intro</param>
 			</result>
 			<result name="editor" type="redirect">
-				<param name="location">/editor/ShowHotNews</param>
+				<param name="location">/intro</param>
 			</result>
 			<result name="fail">/WEB-INF/jsp/Login.jsp</result>
 		</action>
@@ -50,9 +50,9 @@
 			method="execute">
 			<result name="success">/WEB-INF/jsp/Login.jsp</result>
 		</action>
-		<action name="Search" class="com.vangbacdaquy.action.SearchAction"
+		<action name="intro" class="com.vangbacdaquy.action.IntroAction"
 			method="execute">
-			<result name="success">/WEB-INF/jsp/Search.jsp</result>
+			<result name="success">/WEB-INF/jsp/Intro.jsp</result>
 		</action>
 	</package>
 	

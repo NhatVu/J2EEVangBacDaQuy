@@ -53,93 +53,20 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1 class="text-center">Search</h1>
+				<h1 class="text-center">Giới thiệu</h1>
 				<hr />
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<!-- 					<div class="col-sm-8 col-sm-offset-2"> -->
 					<div class="col-sm-12">
-<!-- 						<h3>Displaying all 480 results for</h3> -->
-						<!-- serach bar -->
-						<form onsubmit="onSubmitHandle()" accept-charset="UTF-8">
-							<div class="input-group">
-								<input type="text" id="query" class="form-control"
-									placeholder="Search..."> <span class="input-group-btn">
-									<button type="submit" name="search" id="search-btn"
-										class="btn btn-flat">
-										<i class="fa fa-search"></i>
-									</button>
-								</span>
-							</div>
-						</form>
+					Đồ án môn học J2EE
 					</div>
 				</div>
 
-				<!-- Filter -->
-				<div class="form-inline show-news-filter">
-					<div class="form-group">
-						<label for="focusedInput">Source</label> <select
-							class="form-control" name="source" onchange="handleSelectChange(config)">
-							<option value="all">All</option>
-							<option value="twitter">Twitter</option>
-							<option value="facebook">Facebook</option>
-							<option value="news">News</option>
-						</select>
-					</div>
-<!-- 					<div class="form-group"> -->
-<!-- 						<label for="inputPassword">Category</label> <select -->
-<!-- 							class="form-control" name="category" onchange="handleSelectChange(config)"> -->
-<!-- 							<option value="">Any</option> -->
-<!-- 							<option value="">Elections</option> -->
-<!-- 							<option value="">Scandals/Hearings</option> -->
-<!-- 							<option value="">Legal/Criminal Cases</option> -->
-<!-- 							<option value="">Natural Disasters</option> -->
-<!-- 							<option value="">Accidents</option> -->
-<!-- 							<option value="">Acts of Violence or War</option> -->
-<!-- 							<option value="">Science and Discovery News</option> -->
-<!-- 							<option value="">Bizarre News and World Records</option> -->
-<!-- 							<option value="">Financial News</option> -->
-<!-- 							<option value="">New Laws</option> -->
-<!-- 							<option value="">Sports News</option> -->
-<!-- 							<option value="">Political and Diplomatic Meetings</option> -->
-<!-- 							<option value="">Celebrity and Human Interest News</option> -->
-<!-- 							<option value="">General</option> -->
-<!-- 						</select> -->
-<!-- 					</div> -->
-					<!-- <div class="form-group">
-						<label for="inputSuccess2">Date</label>
-						<div class='input-group date' id='startDate' style="width: 70%">
-							<input type='text' class="form-control" name="fromDate"
-								id="selectedDate" /> <span class="input-group-addon"> <span
-								class="glyphicon glyphicon-calendar"></span>
-							</span>
-						</div>
-					</div> -->
-					<div class="form-group">
-						<label for="inputSuccess2">Date Range</label> <select
-							class="form-control" name="dateRange"
-							onchange="handleSelectChange(config)">
-							<option value="all">All</option>
-							<option value="past24hours">Past 24 hours</option>
-							<option value="past7days">Past 7 days</option>
-							<option value="past30days">Past 30 days</option>
-							<option value="past12months">Past 12 months</option>
-							<option value="custom">Custom</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="inputWarning2">Probability</label> <select
-							class="form-control" name="probabilityForYes"
-							onchange="handleSelectChange(config)">
-							<option value="desc">DESC</option>
-							<option value="asc">ASC</option>
-						</select>
-					</div>
-				</div>
-
+			
+					
 				<!-- result list -->
 				<ul class="search-result">
 <!-- 					<li> -->
