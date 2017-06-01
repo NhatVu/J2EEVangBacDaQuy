@@ -84,5 +84,5 @@
 		}
 	</style>
 <footer class="main-footer" style="text-align: right;">
-    <strong>� 2017 SE08-UIT</strong>
+    <strong> 2017 SE08-UIT</strong>
 </footer>

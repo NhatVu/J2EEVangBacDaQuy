@@ -87,7 +87,7 @@
 	</div>
 
 	<div class="hidden-xs">
-		<b class="login-footer">� 2016 Admicro.vn</b>
+		<b class="login-footer">2017 SE08-UIT</b>
 	</div>
 
 	<script src="./plugins/jQuery/jquery-2.2.3.min.js"></script>
